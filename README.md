@@ -37,3 +37,13 @@ On GitHub, open a file, choose **Edit**, make the change and commit to `main`. P
 The new homepage includes recruiter-oriented introductory copy, a View resume link, email and LinkedIn pathways, and the original GitHub contact link. The resume page offers Print / Save as PDF using browser print; it does not pretend a downloadable PDF exists. If a separate approved PDF is later added, link to that real file.
 
 Keep confidential employer materials out of this public repository. Publish new research outcomes only once completed and supported.
+
+## Portfolio v2 — P1
+
+Dedicated case studies: projects/myntra.html (T.H.R.E.A.D., discovery, priorities, architecture, AI trust, contribution, outcomes and reflection) and projects/oracle.html (migration workflow, incremental extraction, PL/SQL automation, outcomes and PM relevance). Homepage cards link to both pages. The existing P0 resume, contacts and project disclosures remain available.
+
+All new illustrations use semantic HTML and CSS in style.css; there are no image downloads, external dependencies or additional build requirements. Vendor comparison fields are conceptual and contain no real quotations. Keep reconstruction captions attached to diagrams. Oracle logging and selective reruns are explicitly retrospective analysis because implementation specifics were not established in the available sources.
+
+Source review included the accessible T.H.R.E.A.D. internship report, CV, Oracle project and interview notes, existing website and supplied brief. Raw private source documents are intentionally not copied to this public repository. Reported metrics are distinguished from derived comparisons; no additional adoption, revenue or accuracy claims are published. Groww research remains in progress.
+
+Edit the project HTML files directly to update their narratives. Use ../ paths for shared assets and homepage links. The case-study table of contents uses native anchor links and works without JavaScript. Reuse the .study-figure, .flow and .study-cards components for additional diagrams. Update stylesheet version query strings when changing shared CSS to avoid stale cached assets.
