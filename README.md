@@ -1,2 +1,2 @@
-# jaychaudhary.github.io
+# jayc09.github.io
 Personal portfolio — Product Management
