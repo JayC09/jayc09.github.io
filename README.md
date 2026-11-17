@@ -47,3 +47,13 @@ All new illustrations use semantic HTML and CSS in style.css; there are no image
 Source review included the accessible T.H.R.E.A.D. internship report, CV, Oracle project and interview notes, existing website and supplied brief. Raw private source documents are intentionally not copied to this public repository. Reported metrics are distinguished from derived comparisons; no additional adoption, revenue or accuracy claims are published. Groww research remains in progress.
 
 Edit the project HTML files directly to update their narratives. Use ../ paths for shared assets and homepage links. The case-study table of contents uses native anchor links and works without JavaScript. Reuse the .study-figure, .flow and .study-cards components for additional diagrams. Update stylesheet version query strings when changing shared CSS to avoid stale cached assets.
+
+## Company identity update
+
+The hero explicitly identifies Jay as an MBA Student at IIM Raipur. Scoped company themes use pink/orange for Myntra and red for Oracle across cards, experience entries, highlights and case-study pages. The neutral portfolio theme remains the default elsewhere.
+
+Logo source files (unmodified PNG images embedded in self-contained SVG containers):
+- Myntra: https://constant.myntassets.com/www/data/portal/mlogo.png (linked by Myntra's public homepage).
+- Oracle: https://www.oracle.com/a/pr/docs/oracle-logo.zip (official Oracle News resources download).
+
+assets/myntra-logo.svg and assets/oracle-logo.svg are served locally. Keep the supplied proportions and white logo panels. Company logos identify past experience; they are not endorsement claims.

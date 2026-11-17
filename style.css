@@ -113,3 +113,56 @@
   a{color:inherit!important}
 }
 
+
+/* Company identity: scoped accents preserve the portfolio's neutral base. */
+.brand-myntra{--accent:#a91c58;--brand-bright:#ff3f6c;--brand-secondary:#ff912d;--soft:#fff0f5;--brand-border:#efc3d2;--brand-tint:#fff7fa}
+.brand-oracle{--accent:#b83929;--brand-bright:#c74634;--brand-secondary:#c74634;--soft:#fbece7;--brand-border:#e6c4bb;--brand-tint:#fff7f3}
+.hero-top{flex-wrap:wrap;gap:16px}
+.hero-identity{display:flex;flex-wrap:wrap;align-items:center;gap:9px 14px}
+.hero-identity .mba-label{letter-spacing:.04em;text-transform:none;padding:5px 10px;border:1px solid #bccfba;border-radius:3px;background:#edf3e8;color:#24553d;font-size:13px}
+.hero-identity>span:last-child{font-size:11px;letter-spacing:.10em}
+.hero-employers{display:flex;align-items:center;flex-wrap:wrap;gap:12px 16px;margin-top:28px}
+.hero-employers>span{font-size:11px;color:var(--muted);margin-right:2px}
+.hero-employers a{display:flex;align-items:center;justify-content:center;padding:5px 13px;background:#fff;border:1px solid var(--line);border-radius:4px}
+.company-logo{display:block;object-fit:contain;width:144px;height:auto;max-width:100%}
+.hero-employers .company-logo{width:112px;height:35px;object-fit:contain}
+.company-logo-panel{display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;background:white;border:1px solid var(--brand-border,var(--line));border-radius:4px;padding:7px 14px;margin-bottom:18px}
+.project.brand-myntra,.project.brand-oracle{border-color:var(--brand-border);border-top:3px solid var(--brand-bright)}
+.project.brand-myntra{background:var(--brand-tint)}
+.project.brand-oracle{background:#fff}
+.project.brand-myntra:hover,.project.brand-oracle:hover{border-color:var(--brand-bright)}
+.brand-myntra .project-thumbnail,.brand-oracle .project-thumbnail{background:var(--soft);border-color:var(--brand-border)}
+.brand-myntra .thumb-hub>span{border-color:var(--brand-border)}
+.brand-myntra .thumb-hub>strong{background:var(--accent);box-shadow:0 3px 0 var(--brand-secondary)}
+.brand-myntra .tags span,.brand-oracle .tags span{border-color:var(--brand-border);color:var(--accent)}
+.brand-myntra .project-rule{background:var(--brand-border)}
+.brand-oracle .project-callout{border-color:var(--brand-bright)}
+.project-featured.brand-myntra details{border-color:var(--brand-border)}
+.experience-row.brand-myntra,.experience-row.brand-oracle{padding:30px;border:1px solid var(--brand-border);border-left:4px solid var(--brand-bright);border-radius:4px;background:var(--brand-tint);margin-bottom:18px}
+.experience-row.brand-myntra h3,.experience-row.brand-oracle h3{color:var(--accent)}
+.study-company-logo{display:flex;align-items:center;justify-content:center;width:max-content;max-width:100%;padding:12px 22px;background:white;border:1px solid var(--brand-border);border-radius:4px;margin-bottom:24px}
+.study-company-logo .company-logo{width:175px}
+.study-page.brand-myntra .study-hero,.study-page.brand-oracle .study-hero{border-bottom-color:var(--brand-border)}
+.study-page.brand-myntra .study-figure,.study-page.brand-oracle .study-figure{background:var(--brand-tint);border-color:var(--brand-border)}
+.study-page.brand-myntra .study-figure figcaption,.study-page.brand-oracle .study-figure figcaption{border-color:var(--brand-border)}
+.study-page.brand-myntra .flow li,.study-page.brand-oracle .flow li{border-color:var(--brand-border)}
+.study-page.brand-myntra .analysis-note,.study-page.brand-oracle .analysis-note{border-color:var(--brand-bright)}
+.study-page.brand-myntra .outcome-panel{background:var(--soft);border-color:var(--brand-border)}
+.study-page.brand-oracle .after-bar{background:var(--brand-bright)}
+.study-page.brand-oracle .before-bar{background:#a49a94}
+.study-page.brand-oracle .time-track{background:#eaded8}
+.study-page.brand-myntra .table-wrap thead,.study-page.brand-oracle .table-wrap thead{background:var(--soft)}
+.study-page.brand-myntra .contact-section,.study-page.brand-oracle .contact-section{background:var(--soft);border-color:var(--brand-border)}
+.brand-myntra .button:hover,.brand-oracle .button:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+@media(max-width:600px){
+ .hero-identity{gap:8px 12px}
+ .hero-identity>span:first-child{font-size:13px}
+ .hero-identity .mba-label{font-size:12px}
+ .hero-identity>span:last-child{flex-basis:100%;font-size:10px;margin-top:3px}
+ .hero-employers{gap:10px;margin-top:24px}
+ .hero-employers>span{flex-basis:100%}
+ .hero-employers .company-logo{width:106px;height:33px}
+ .experience-row.brand-myntra,.experience-row.brand-oracle{padding:23px 20px}
+ .study-company-logo{padding:9px 18px}
+ .study-company-logo .company-logo{width:150px}
+}
