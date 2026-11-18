@@ -19,13 +19,15 @@ The current site keeps the slat hero, white scrolling name, company branding and
 | .quote-consolidation | Seven-second CSS loop: generic WhatsApp, email and Excel quote tiles enter one shared dashboard; caption is always readable |
 | Myntra .flow | One-time sequential highlighting when the diagram enters view, without replay controls |
 | Skills and other introductory blocks | One-time 18px/650ms entrance with a 90ms sibling stagger; employer records stay immediately visible |
-| Hero circular actions | Small desktop magnetic displacement, delayed label response and press feedback |
+| Hero actions and MBA badge | Nearest-target desktop attraction from half the target size plus 144px, a 38px displacement cap, delayed labels and collision spacing; focused targets stay still |
 | Case-study reading column | Subtle progress line and aria-current on the existing table of contents |
 | Navigation, links and details | CSS underline, arrow, press and progressive native disclosure feedback |
 
 Oracle's time comparisons are static. Its original Before and After workflow figures are both readable without a toggle. Architecture headings are plain text. Organize, replay, comparison and visible motion-pause controls are removed at the owner's request.
 
 Escape toggles motion globally through portfolio:motion-pause. script.js supplies screen-reader instructions and status, pauses the name and adds .motion-paused for CSS loops. micro-slats.js listens to the same event and stops frame scheduling. No extra visible button is required. Finite entrances settle to readable end states when motion is paused. Reduced-motion preferences disable continuous motion and show the static sourcing illustration. All content is visible without JavaScript; the slat field has a CSS fallback if WebGL is unavailable.
+
+The hero uses --hero-orange (#f97316) on --hero-orange-base. Hover and visible focus reveal an orange circle growing from the bottom edge in 620ms. The fill includes an aria-hidden copy of the label in dark ink, so dark text appears only over the orange portion while the original orange label remains over the dark portion. Both label layers share the same magnetic movement. The same treatment applies to the MBA badge, including its decorative seal. Reduced motion makes the fill immediate; touch does not use magnetic tracking.
 
 ## Editing
 
@@ -35,6 +37,7 @@ Escape toggles motion globally through portfolio:motion-pause. script.js supplie
 - Oracle chart: .migration-comparison on the homepage and the original .time-chart in projects/oracle.html. Keep the <30 min bound and original explanatory captions.
 - Name and keyboard motion state: script.js. Keep hover/focus/offscreen and reduced-motion support.
 - Pointer responses, observers and reading progress: motion.js. Features are scoped and listeners/observers are cleaned up on non-persisted exits.
+- Orange palette and sunrise fill: --hero-orange tokens and .hero-sun-action/.hero-sun-fill in refinements.css. Keep the fill's label aria-hidden and the original label accessible. MBA labels on the homepage and resume use simply MBA; education dates remain in the resume.
 - Background palette: slats.css. Wave settings and GPU budgets: micro-slats.js. Keep the contrast veil, 1.8-million-pixel budget and visibility checks.
 - Change shared file query versions in all applicable HTML pages when updating shared assets.
 

@@ -50,7 +50,7 @@ Edit the project HTML files directly to update their narratives. Use ../ paths f
 
 ## Company identity update
 
-The hero explicitly identifies Jay as an MBA Student at IIM Raipur. Scoped company themes use pink/orange for Myntra and red for Oracle across cards, experience entries, highlights and case-study pages. The neutral portfolio theme remains the default elsewhere.
+The hero explicitly identifies Jay as an MBA at IIM Raipur. Scoped company themes use pink/orange for Myntra and red for Oracle across cards, experience entries, highlights and case-study pages. The neutral portfolio theme remains the default elsewhere.
 
 Logo source files (unmodified PNG images embedded in self-contained SVG containers):
 - Myntra: https://constant.myntassets.com/www/data/portal/mlogo.png (linked by Myntra's public homepage).
@@ -115,3 +115,7 @@ The previous public version is preserved on codex/backup-before-compact-experien
 The work-experience headers and case-study mastheads now use the owner's supplied assets: assets/myntra-symbol.png, assets/myntra-wordmark.png, assets/oracle-symbol.png and assets/oracle-wordmark.png. All four PNG files are copied unchanged. .brand-frame in refinements.css displays their artwork without the surrounding transparent margins. The wordmark image supplies the company heading's accessible name, avoiding a second visible typed name. The previous SVG logo assets remain archived in the repository.
 
 The conceptual sourcing animation no longer includes a persistent connector line. Quote tiles still enter the shared dashboard automatically, and the consolidated phase leaves no line outside the dashboard.
+
+## Orange hero actions
+
+The hero's MBA badge, View work and View resume actions use #f97316 with a radial sunrise fill on hover and keyboard focus. A matched dark label is revealed with the fill for contrast; the duplicate visual label is aria-hidden. The three actions use stronger nearest-target desktop magnetism with a 38px cap and extra approach range, while the circles retain a minimum gap. Focus, touch and reduced motion disable magnetic tracking. Edit the orange tokens and .hero-sun-action rules in refinements.css; the pointer behavior is in motion.js. Displayed education labels use MBA throughout the site, with the existing resume dates preserved.

@@ -1,5 +1,5 @@
 /* Compact experience overview; retains the existing type, palette and mobile flow. */
-:root{--compact-section-gap:48px;--consolidation-cycle:7s}
+:root{--compact-section-gap:48px;--consolidation-cycle:7s;--hero-orange:#f97316;--hero-orange-ink:#17211b;--hero-orange-base:#111a16;--hero-sun-duration:620ms}
 .compact-home .portrait-intro{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-lg);padding-block:var(--space-xl)}
 .compact-home .portrait-intro>p{font-size:var(--text-title);max-width:52ch}
 .compact-home .portrait-intro .hero-tail{align-items:center;justify-self:auto;gap:var(--space-sm)}
@@ -118,4 +118,18 @@
 }
 @media print{
  .quote-consolidation .quote-source,.quote-consolidation .consolidation-dashboard>span{animation:none!important;transform:none!important;opacity:1!important}
+}
+/* The fill and its dark label share one radial clip, keeping contrast during the rise. */
+.portrait-hero .hero-sun-action,.portrait-hero .hero-sun-action:hover{isolation:isolate;overflow:clip;border:1px solid var(--hero-orange);background:var(--hero-orange-base);color:var(--hero-orange);text-decoration:none;transition:none}
+.portrait-actions a.hero-sun-action{position:relative}
+.hero-sun-fill{position:absolute;inset:0;display:flex;align-items:inherit;justify-content:inherit;gap:inherit;padding:inherit;background:var(--hero-orange);color:var(--hero-orange-ink);clip-path:circle(0% at 50% 100%);transition:clip-path var(--hero-sun-duration) var(--ease-in-out);pointer-events:none;z-index:var(--z-raised)}
+.hero-sun-action:is(:hover,:focus-visible,:active)>.hero-sun-fill{clip-path:circle(150% at 50% 100%)}
+.education-badge .degree-seal{background:var(--hero-orange);color:var(--hero-orange-ink)}
+.education-badge .hero-sun-fill .degree-seal{background:var(--hero-orange-ink);color:var(--hero-orange)}
+.portrait-content .hero-sun-action:focus-visible{outline:2px solid var(--hero-orange);outline-offset:5px}
+@media(prefers-reduced-motion:reduce){.hero-sun-fill{transition:none}}
+.motion-paused .hero-sun-fill{transition:none}
+@supports not (clip-path:circle(0% at 50% 100%)){
+ .hero-sun-fill{display:none}
+ .portrait-hero .hero-sun-action:is(:hover,:focus-visible,:active){background:var(--hero-orange);color:var(--hero-orange-ink)}
 }
