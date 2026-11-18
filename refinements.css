@@ -34,7 +34,6 @@
 .source-sheet{top:90px;--source-dy:-43px;--source-angle:-2deg;--source-delay:.36s}
 .source-note{display:none}
 .channel-mark{width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--brand-tint,var(--color-paper-2));color:var(--color-accent);font-size:var(--text-sm);font-weight:600}
-.consolidation-path{position:absolute;left:41%;right:49%;top:62px;height:1px;background:var(--brand-rule,var(--color-rule))}
 .consolidation-dashboard{position:absolute;right:0;top:0;width:50%;height:132px;padding:var(--space-sm);display:grid;align-content:center;gap:var(--space-2xs);border:1px solid var(--brand-rule,var(--color-rule));border-top:2px solid var(--color-accent);background:var(--brand-tint,var(--color-paper-2));font-size:var(--text-sm);line-height:1.45}
 .consolidation-dashboard strong{font-size:var(--text-sm);font-weight:600;margin-bottom:var(--space-2xs)}
 .consolidation-dashboard>span{border-bottom:1px solid var(--brand-rule,var(--color-rule));padding-bottom:var(--space-2xs)}
@@ -56,6 +55,17 @@
 .work-card .time-track{height:16px}
 .work-card .time-chart strong,.work-card .time-chart>div>span{font-size:var(--text-sm)}
 .work-card .time-chart .time-bar{transform:none!important}
+.work-card-header .brand-heading{height:40px;display:flex;align-items:center;margin:0 0 var(--space-2xs)}
+.work-card-header>div:last-child{min-width:0}
+.brand-symbol-box{width:48px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.brand-frame{display:block;position:relative;overflow:clip;aspect-ratio:var(--asset-ratio);flex-shrink:0}
+.brand-frame .brand-art{position:absolute;max-width:none;width:var(--asset-width);height:auto;left:var(--asset-left);top:var(--asset-top)}
+.myntra-symbol{width:48px}
+.myntra-wordmark{width:128px}
+.oracle-symbol{width:40px}
+.oracle-wordmark{width:160px}
+.brand-lockup{display:flex;align-items:center;gap:var(--space-sm)}
+.study-company-logo.supplied-brand{padding:0;background:transparent}
 .research-section{border-top:1px solid var(--color-rule)}
 .compact-home .research-section .project{padding-block:var(--space-lg);border:0;row-gap:var(--space-md)}
 .compact-home .research-section h3{font-size:var(--text-title)}

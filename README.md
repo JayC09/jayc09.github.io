@@ -109,3 +109,9 @@ refinements.css controls the denser spacing, card grid, static Oracle chart and 
 Animation, replay, organize and comparison buttons are removed. Motion runs automatically; Escape pauses or resumes continuous motion, and reduced-motion preferences show static views. The new loop pauses offscreen or when the document is hidden. Native navigation, research/background disclosures and resume printing remain available. MOTION.md describes the current behavior.
 
 The previous public version is preserved on codex/backup-before-compact-experience-2026-11-18 at commit 40e1820522b06ecc3f1ae6f0774c696e0c1669af.
+
+## Supplied brand identities
+
+The work-experience headers and case-study mastheads now use the owner's supplied assets: assets/myntra-symbol.png, assets/myntra-wordmark.png, assets/oracle-symbol.png and assets/oracle-wordmark.png. All four PNG files are copied unchanged. .brand-frame in refinements.css displays their artwork without the surrounding transparent margins. The wordmark image supplies the company heading's accessible name, avoiding a second visible typed name. The previous SVG logo assets remain archived in the repository.
+
+The conceptual sourcing animation no longer includes a persistent connector line. Quote tiles still enter the shared dashboard automatically, and the consolidated phase leaves no line outside the dashboard.
