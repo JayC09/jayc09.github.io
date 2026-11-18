@@ -2,6 +2,8 @@
 
 A responsive, accessible, single-page portfolio built with HTML, CSS and optional vanilla JavaScript. No build process, package installation, backend, trackers or API keys.
 
+The homepage and both case studies share a continuous dark contact/footer surface. Email, LinkedIn, GitHub and Resume use matching pill buttons with the hero's lime radial fill and gentler desktop attraction. Edit their native links in each page, their appearance in `refinements.css`, and contact-group movement settings in `motion.js`.
+
 ## Files
 
 - `index.html`: homepage, professional highlights, work, and verified contact links.

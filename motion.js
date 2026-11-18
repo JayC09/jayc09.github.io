@@ -94,71 +94,77 @@
   }
 
   function pointerDepth() {
-    const hero = document.querySelector('.portrait-hero');
-    if (!hero || !gs) return;
+    if (!gs) return;
+    const groups = [
+      { root: document.querySelector('.portrait-hero'), selector: '.magnetic-zone', badge: true, cap: 38, reach: 144, gap: 8, labelPull: .3, press: .95 },
+      { root: document.querySelector('.contact-section'), selector: '.contact-magnetic-zone', badge: false, cap: 22, reach: 96, gap: 6, labelPull: .22, press: .97 }
+    ].filter(group => group.root);
     pointerMedia = gs.matchMedia();
     pointerMedia.add('(hover: hover) and (pointer: fine) and (min-width: 961px) and (prefers-reduced-motion: no-preference)', () => {
-      const signal = new AbortController(), badge = hero.querySelector('.education-badge');
-      const bind = (node, event, fn) => node.addEventListener(event, fn, { signal: signal.signal, passive: true });
-      const quick = (node, key, duration = .36) => gs.quickTo(node, key, { duration, ease: 'back.out(1.25)' });
-      const magnets = all('.magnetic-zone', hero).map(zone => {
-        return { zone, button: zone.querySelector('a') };
-      });
-      if (badge) magnets.push({ button: badge });
-      magnets.forEach(magnet => {
-        const labels = all('.magnetic-label', magnet.button);
-        Object.assign(magnet, { x: quick(magnet.button, 'x'), y: quick(magnet.button, 'y'), lx: quick(labels, 'x', .44), ly: quick(labels, 'y', .44) });
-      });
-      let point, pending = 0;
-      const measure = () => magnets.forEach(magnet => {
-        const rect = (magnet.zone || magnet.button).getBoundingClientRect();
-        const x = magnet.zone ? 0 : Number(gs.getProperty(magnet.button, 'x'));
-        const y = magnet.zone ? 0 : Number(gs.getProperty(magnet.button, 'y'));
-        magnet.rect = { left: rect.left - x, right: rect.right - x, top: rect.top - y, width: rect.width, height: rect.height };
-      });
-      const reset = (instant = false) => magnets.forEach(magnet => {
-        for (const move of [magnet.x, magnet.y, magnet.lx, magnet.ly]) {
-          move(0);
-          if (instant) move.tween.progress(1).pause();
-        }
-      });
-      const update = () => {
-        pending = 0;
-        if (!point || window.portfolioMotionPaused) return;
-        if (magnets.some(magnet => document.activeElement === magnet.button)) { reset(true); return; }
-        measure();
-        let nearest, nearestDistance = Infinity;
-        magnets.forEach(magnet => {
-          const r = magnet.rect, distance = Math.hypot(point.x - r.left - r.width / 2, point.y - r.top - r.height / 2);
-          if (document.activeElement !== magnet.button && distance < Math.max(r.width, r.height) / 2 + 144 && distance < nearestDistance) { nearest = magnet; nearestDistance = distance; }
+      const cleanups = groups.map(group => {
+        const root = group.root, signal = new AbortController(), badge = group.badge ? root.querySelector('.education-badge') : null;
+        const bind = (node, event, fn) => node.addEventListener(event, fn, { signal: signal.signal, passive: true });
+        const quick = (node, key, duration = .36) => gs.quickTo(node, key, { duration, ease: 'back.out(1.25)' });
+        const magnets = all(group.selector, root).map(zone => {
+          return { zone, button: zone.querySelector('a') };
         });
+        if (badge) magnets.push({ button: badge });
         magnets.forEach(magnet => {
-          const r = magnet.rect, dx = point.x - r.left - r.width / 2, dy = point.y - r.top - r.height / 2;
-          const distance = Math.hypot(dx, dy), radius = Math.max(r.width, r.height) / 2 + 144;
-          const pull = magnet === nearest ? Math.min(38, distance * .58) * Math.max(0, 1 - (distance / radius) ** 2) : 0;
-          let x = distance ? dx / distance * pull : 0;
-          const y = distance ? dy / distance * pull : 0;
-          // Preserve an 8px gap between the two circular targets as they attract.
-          if (magnet.zone) for (const other of magnets.filter(item => item.zone && item !== magnet)) {
-            if (other.rect.left >= r.right && x > 0) x = Math.min(x, Math.max(0, other.rect.left - r.right - 8));
-            if (other.rect.right <= r.left && x < 0) x = Math.max(x, -Math.max(0, r.left - other.rect.right - 8));
+          const labels = all('.magnetic-label', magnet.button);
+          Object.assign(magnet, { x: quick(magnet.button, 'x'), y: quick(magnet.button, 'y'), lx: quick(labels, 'x', .44), ly: quick(labels, 'y', .44) });
+        });
+        let point, pending = 0;
+        const measure = () => magnets.forEach(magnet => {
+          const rect = (magnet.zone || magnet.button).getBoundingClientRect();
+          const x = magnet.zone ? 0 : Number(gs.getProperty(magnet.button, 'x'));
+          const y = magnet.zone ? 0 : Number(gs.getProperty(magnet.button, 'y'));
+          magnet.rect = { left: rect.left - x, right: rect.right - x, top: rect.top - y, width: rect.width, height: rect.height };
+        });
+        const reset = (instant = false) => magnets.forEach(magnet => {
+          for (const move of [magnet.x, magnet.y, magnet.lx, magnet.ly]) {
+            move(0);
+            if (instant) move.tween.progress(1).pause();
           }
-          magnet.x(x); magnet.y(y); magnet.lx(x * .3); magnet.ly(y * .3);
         });
-      };
-      measure(); bind(window, 'resize', measure);
-      bind(hero, 'pointermove', event => { if (event.pointerType !== 'mouse') return; point = { x: event.clientX, y: event.clientY }; if (!pending) pending = frame(update); });
-      bind(window, 'scroll', () => { if (point && !pending) pending = frame(update); });
-      bind(hero, 'pointerleave', () => { cancelFrame(pending); pending = 0; point = null; reset(); });
-      bind(window, 'portfolio:motion-pause', () => { if (window.portfolioMotionPaused) reset(true); });
-      magnets.forEach(magnet => {
-        bind(magnet.button, 'focus', () => reset(true));
-        bind(magnet.button, 'pointerdown', () => to(magnet.button, { scale: .95, duration: .15, ease: 'power2.out', overwrite: 'auto' }));
-        bind(magnet.button, 'pointerup', () => to(magnet.button, { scale: 1, duration: .2, ease: 'power2.out', overwrite: 'auto' }));
-        bind(magnet.button, 'pointercancel', () => set(magnet.button, { scale: 1 }));
-        bind(magnet.button, 'pointerleave', () => to(magnet.button, { scale: 1, duration: .2, ease: 'power2.out', overwrite: 'auto' }));
+        const update = () => {
+          pending = 0;
+          if (!point || window.portfolioMotionPaused) return;
+          if (magnets.some(magnet => document.activeElement === magnet.button)) { reset(true); return; }
+          measure();
+          let nearest, nearestDistance = Infinity;
+          magnets.forEach(magnet => {
+            const r = magnet.rect, distance = Math.hypot(point.x - r.left - r.width / 2, point.y - r.top - r.height / 2);
+            if (document.activeElement !== magnet.button && distance < Math.max(r.width, r.height) / 2 + group.reach && distance < nearestDistance) { nearest = magnet; nearestDistance = distance; }
+          });
+          magnets.forEach(magnet => {
+            const r = magnet.rect, dx = point.x - r.left - r.width / 2, dy = point.y - r.top - r.height / 2;
+            const distance = Math.hypot(dx, dy), radius = Math.max(r.width, r.height) / 2 + group.reach;
+            const pull = magnet === nearest ? Math.min(group.cap, distance * .58) * Math.max(0, 1 - (distance / radius) ** 2) : 0;
+            let x = distance ? dx / distance * pull : 0;
+            const y = distance ? dy / distance * pull : 0;
+            // Keep neighboring magnetic targets separated as they attract.
+            if (magnet.zone) for (const other of magnets.filter(item => item.zone && item !== magnet)) {
+              if (other.rect.left >= r.right && x > 0) x = Math.min(x, Math.max(0, other.rect.left - r.right - group.gap));
+              if (other.rect.right <= r.left && x < 0) x = Math.max(x, -Math.max(0, r.left - other.rect.right - group.gap));
+            }
+            magnet.x(x); magnet.y(y); magnet.lx(x * group.labelPull); magnet.ly(y * group.labelPull);
+          });
+        };
+        measure(); bind(window, 'resize', measure);
+        bind(root, 'pointermove', event => { if (event.pointerType !== 'mouse') return; point = { x: event.clientX, y: event.clientY }; if (!pending) pending = frame(update); });
+        bind(window, 'scroll', () => { if (point && !pending) pending = frame(update); });
+        bind(root, 'pointerleave', () => { cancelFrame(pending); pending = 0; point = null; reset(); });
+        bind(window, 'portfolio:motion-pause', () => { if (window.portfolioMotionPaused) reset(true); });
+        magnets.forEach(magnet => {
+          bind(magnet.button, 'focus', () => reset(true));
+          bind(magnet.button, 'pointerdown', () => to(magnet.button, { scale: group.press, duration: .15, ease: 'power2.out', overwrite: 'auto' }));
+          bind(magnet.button, 'pointerup', () => to(magnet.button, { scale: 1, duration: .2, ease: 'power2.out', overwrite: 'auto' }));
+          bind(magnet.button, 'pointercancel', () => set(magnet.button, { scale: 1 }));
+          bind(magnet.button, 'pointerleave', () => to(magnet.button, { scale: 1, duration: .2, ease: 'power2.out', overwrite: 'auto' }));
+        });
+        return () => { signal.abort(); cancelFrame(pending); };
       });
-      return () => { signal.abort(); cancelFrame(pending); };
+      return () => cleanups.forEach(cleanup => cleanup());
     });
   }
 

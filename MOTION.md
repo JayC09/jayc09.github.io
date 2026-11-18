@@ -20,6 +20,7 @@ The current site keeps the slat hero, white scrolling name, company branding and
 | Myntra .flow | One-time sequential highlighting when the diagram enters view, without replay controls |
 | Skills and other introductory blocks | One-time 18px/650ms entrance with a 90ms sibling stagger; employer records stay immediately visible |
 | Hero actions and MBA badge | Nearest-target desktop attraction from half the target size plus 144px, a 38px displacement cap, delayed labels and collision spacing; focused targets stay still |
+| Contact pills | Same radial lime fill and nearest-target controller, with a gentler 22px displacement cap, 96px approach range and 6px minimum spacing; static on touch and reduced motion |
 | Case-study reading column | Subtle progress line and aria-current on the existing table of contents |
 | Navigation, links and details | CSS underline, arrow, press and progressive native disclosure feedback |
 
@@ -40,6 +41,7 @@ The hero uses --hero-orange (#D5F478) on --hero-orange-base. Hover and visible f
 - Lime palette and sunrise fill: --hero-orange tokens and .hero-sun-action/.hero-sun-fill in refinements.css. Keep the fill's label aria-hidden and the original label accessible. MBA labels on the homepage and resume use simply MBA; education dates remain in the resume.
 - Background palette: slats.css. Wave settings and GPU budgets: micro-slats.js. Keep the contrast veil, 1.8-million-pixel budget and visibility checks.
 - Change shared file query versions in all applicable HTML pages when updating shared assets.
+- Contact links: `.contact-actions` on the homepage and both case studies. Keep one accessible label and the aria-hidden fill label in each `.contact-pill`. `.contact-magnetic-zone` supplies its stable anchor; group settings in `motion.js` control attraction independently of the hero. `.contact-footer` and `.footer-inner` in `refinements.css` keep the closing surface continuous and full width. The printable resume retains its light footer.
 
 ## Dependencies and attribution
 

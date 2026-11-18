@@ -25,6 +25,7 @@ tokens.css owns every color, typeface and scale.
 - One primary recipe: ink fill, paired paper text, pill outline.
 - Secondary: transparent surface, ink border.
 - Hero actions: lime #D5F478 outline and lettering on dark ink. A bottom-origin radial fill reveals dark lettering with the lime surface, maintaining contrast throughout. Keyboard focus receives the same fill. The MBA badge and two circular actions use a stronger nearest-target desktop magnet, capped at 38px with extra approach range and collision spacing.
+- Contact actions: four equal pill buttons share the hero's lime fill and focus treatment. Attraction is gentler, capped at 22px with a shorter approach range. The footer continues the contact section's dark background across the full screen on the homepage and both case studies.
 - Text actions are underlined. Every interactive element has immediate visible focus.
 - Resume print handler and every existing route and contact destination stay intact.
 
