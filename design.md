@@ -16,7 +16,7 @@ tokens.css owns every color, typeface and scale.
 - Ink: deep charcoal tinted toward the existing portfolio green.
 - Accent: existing portfolio green. Preserve existing scoped Myntra pink/orange and Oracle red.
 - Type: locally hosted DM Sans, 400 and 600. Headers stay one color and one weight.
-- Canvas: one capped 1440px container, responsive gutters, 32px column gap.
+- Canvas: full-width homepage with responsive edge gutters, as requested by the owner. Reading pages retain the capped 1440px container and 65ch prose measure. Column gap is 32px.
 - Surfaces: whitespace and rules first. No nested cards.
 - Prose: 65ch at 16px or larger, with long reading content retained.
 
@@ -27,8 +27,7 @@ tokens.css owns every color, typeface and scale.
 - Resume print handler and every existing route and contact destination stay intact.
 
 ## Motion
-Still at rest. Transform-only press feedback. Reduced motion removes it.
-No moving name, custom cursor, parallax, preloader or auto-playing loop.
+The homepage name moves continuously right to left using a transform-only loop, as requested by the owner. A visible pause control, hover/focus pause, offscreen pause and reduced-motion static fallback keep it accessible. With JavaScript disabled the name is static and all navigation works. Other feedback is transform-only. No custom cursor, parallax or preloader.
 
 ## Material
 The owner's supplied transparent portrait is used unchanged, framed through CSS to remove empty transparent margins from the visible composition. Existing factual diagrams and logos are retained.

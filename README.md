@@ -70,8 +70,12 @@ Hallmark validation records are stored locally in .hallmark/. .hallmark/copy-cha
 
 ## Portrait-led update
 
-The owner's supplied photo now leads the homepage. assets/jay-chaudhary.png is the original, unchanged 3000 × 4000 transparent PNG. CSS frames its lower portion to avoid the large transparent margin above the subject; no facial features, clothes or background pixels are synthesized or edited.
+The owner's supplied photo now leads the homepage. The current file, assets/jay-chaudhary-photoroom.png, is the unchanged 1800 × 2400 transparent PNG supplied on 18 November. CSS frames its lower portion to avoid the large transparent margin above the subject and limits desktop display size for a sharper portrait. No facial features, clothes or background pixels are synthesized or edited. The earlier assets/jay-chaudhary.png remains available in the repository.
 
-The hero uses a grey field, a centered portrait, large white name text, an MBA badge and a circular work link, following the supplied reference's composition. A lower scrim improves white-text readability. Mobile has its own crop and compact work control; the resume remains available in navigation. Existing company branding, project pages, disclosures, verified contacts and print behavior remain intact.
+The hero fills the viewport edge to edge, with a grey field, a smaller centered portrait, large white scrolling name text, an MBA badge and matching circular work and resume links. A lower scrim improves white-text readability. Mobile has its own crop and controls. The name moves right to left and can be paused; reduced-motion preferences and disabled JavaScript show a static name. Existing company branding, project pages, disclosures, verified contacts and print behavior remain intact.
+
+To change the portrait, replace the image reference and preload in index.html, update its width and height attributes, then adjust .portrait-window img framing in style.css for the new image's transparent margins. Marquee speed is the 28s name-scroll duration in style.css; pause behavior lives in script.js. Update CSS and JavaScript version queries on all four HTML pages when editing shared files.
+
+The version before the smaller portrait and scrolling name is preserved on codex/backup-before-marquee-2026-11-18 at commit a73fad141b64a6988943a24290995199b5b76176.
 
 The previous name-led design is backed up on codex/backup-before-portrait-2026-11-18 at commit eb8f8ef556f1f2ae5f59a320a55b6335d42c536a. This is in addition to the earlier pre-Hallmark backup.

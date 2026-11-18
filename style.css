@@ -1,5 +1,6 @@
 /* Hallmark · shape: Portrait Poster · genre: editorial · theme: brand · redesign: full · hero: Poster (/), Banner (projects), Banner (resume) · nav: wordmark and text links · footer: dark contact close · signature: owner's portrait with a white nameplate and MBA badge · posture: Restrained · imagery: supplied portrait, existing logos and factual diagrams · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H5 E4 S4 R5 V4 · weakest: S, removed generic panels and led with Jay's identity and specific work */
+/* Owner-requested exception to 44d: the homepage spans the viewport, including its edge badge and scrolling name. Reading pages keep their capped measure. */
 /* Hallmark · hero-review: fix, 2 scale findings resolved; official logo backplates retained because the supplied source images contain their own white ground */
 /* Hallmark · waive 77 · resume.html is a dense professional document with real dated rows · the resume's education and certification facts belong in readable record sections rather than invented visual showcases */
 /* Hallmark · waive 59 · resume.html uses compact record sections with hairline separation · fast resume scanning and a short printable document matter more than landing-page section gaps */
@@ -119,3 +120,54 @@ footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:w
  .portrait-intro .hero-employers{flex-wrap:wrap}
 }
 @media(prefers-reduced-motion:reduce){.portrait-content a{transition:none}}
+/* Full-viewport framing and a user-controlled right-to-left name loop. */
+.portrait-page{--container:100%;--gutter:48px}
+.portrait-page .header-inner,.portrait-content{max-width:none}
+.portrait-hero{height:100dvh;min-height:100svh;max-height:none;width:100%}
+.portrait-window{inset:0;width:100%;transform:none}
+.portrait-window img{width:min(1600px,180svh);top:5%;left:50%;transform:translate(-50%,-49%)}
+.portrait-role{right:clamp(48px,12%,240px);width:auto;top:32%}
+.portrait-actions{display:flex;align-items:center;gap:var(--space-lg)}
+.portrait-work,.portrait-resume{display:flex;align-items:center;justify-content:center;width:112px;height:112px;min-height:112px;border:1px solid var(--portrait-ink);border-radius:var(--radius-pill);font-size:var(--text-sm);text-decoration:none;white-space:nowrap}
+.portrait-work:hover,.portrait-resume:hover{background:var(--portrait-badge);text-decoration:none}
+.portrait-hero h1{left:0;right:0;bottom:var(--space-lg);font-size:clamp(5rem,13.6vw,17.5rem);max-width:none;white-space:nowrap;line-height:1.05}
+.name-static{display:block;padding-inline:var(--gutter);font-size:clamp(2.25rem,10.5vw,11rem)}
+.name-enhanced .name-static{display:none}
+.name-marquee{display:block;width:100%;overflow:clip}
+.name-track{display:flex;width:max-content;animation:name-scroll 28s linear infinite;animation-play-state:paused}
+.name-is-running .name-track{animation-play-state:running}
+.name-group{display:flex;align-items:baseline;gap:var(--space-2xl);padding-right:var(--space-2xl);flex-shrink:0}
+.name-separator{display:block;align-self:center;width:.75em;height:.055em;background:currentColor}
+.name-toggle{position:absolute;right:var(--gutter);bottom:var(--space-xs);z-index:var(--z-raised);min-height:44px;padding:var(--space-xs) var(--space-md);border:0;border-radius:var(--radius-pill);background:var(--portrait-badge);color:var(--portrait-ink);font:inherit;font-size:var(--text-sm);cursor:pointer}
+.name-toggle:focus-visible{outline-color:var(--portrait-focus)}
+.name-toggle:hover{background:var(--portrait-seal)}
+@keyframes name-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(max-width:960px){
+ .portrait-page{--gutter:24px}
+ .portrait-window img{width:min(1400px,180svh);top:8%}
+ .portrait-role{right:var(--gutter);top:25%}
+ .portrait-work,.portrait-resume{width:96px;height:96px;min-height:96px}
+ .portrait-actions{gap:var(--space-md)}
+}
+@media(max-width:600px){
+ .portrait-page{--gutter:16px}
+ .portrait-hero{height:100dvh;min-height:100svh;max-height:none}
+ .portrait-window{top:31%;width:100%;left:0}
+ .portrait-window img{width:min(1120px,290%);left:44%;top:0}
+ .portrait-role{right:var(--gutter);top:14%}
+ .portrait-role>p{font-size:var(--text-lg)}
+ .portrait-actions{gap:var(--space-sm)}
+ .portrait-work,.portrait-resume{width:88px;height:88px;min-height:88px;font-size:var(--text-sm)}
+ .portrait-hero h1{bottom:var(--space-xl);font-size:clamp(5rem,18vw,7rem)}
+ .name-group{gap:var(--space-xl);padding-right:var(--space-xl)}
+ .education-badge{bottom:28%}
+ .name-toggle{bottom:0}
+}
+@media(max-width:600px) and (max-height:700px){
+ .portrait-window{top:45%}
+ .portrait-role{top:18%}
+ .education-badge{top:29%;bottom:auto;padding:var(--space-sm)}
+ .degree-seal{display:none}
+ .portrait-work,.portrait-resume{width:88px;height:88px;min-height:88px}
+}
+@media(prefers-reduced-motion:reduce){.name-track{animation:none;transform:none}.name-toggle{display:none}}
