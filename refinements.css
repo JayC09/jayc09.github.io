@@ -131,9 +131,10 @@
 .motion-paused .hero-sun-fill{transition:none}
 /* Contact actions echo the hero, with stable pill-sized magnetic targets. */
 .contact-section .contact-actions{gap:var(--space-sm);flex-shrink:0;max-width:100%}
-.contact-magnetic-zone{position:relative;display:inline-flex;flex-shrink:0}
-.contact-section .contact-pill,.contact-section .contact-pill:hover{position:relative;isolation:isolate;overflow:clip;display:inline-flex;align-items:center;justify-content:center;width:128px;min-height:48px;padding:var(--space-sm) var(--space-lg);border:1px solid var(--hero-orange);border-radius:var(--radius-pill);background:var(--hero-orange-base);color:var(--hero-orange);font-size:var(--text-sm);line-height:1.4;white-space:nowrap;text-decoration:none;transition:none}
-.contact-section .contact-pill:focus-visible{outline:2px solid var(--hero-orange);outline-offset:5px}
+.contact-magnetic-zone,.pill-magnetic-zone{position:relative;display:inline-flex;flex-shrink:0}
+.pill-action,.pill-action:hover{position:relative;isolation:isolate;overflow:clip;display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:var(--space-sm) var(--space-lg);border:1px solid var(--hero-orange);border-radius:var(--radius-pill);background:var(--hero-orange-base);color:var(--hero-orange);font-size:var(--text-sm);line-height:1.4;white-space:nowrap;text-decoration:none;transition:none}
+.contact-section .contact-pill{width:128px}
+.pill-action:focus-visible{outline:2px solid var(--hero-orange);outline-offset:5px}
 .contact-footer{display:block;max-width:none;padding:0;background:var(--color-dark);color:var(--color-muted-dark);border-top:1px solid color-mix(in oklab,var(--color-on-dark) 16%,transparent)}
 .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--space-lg);padding-block:var(--space-lg);font-size:var(--text-sm)}
 .contact-footer a{color:var(--color-on-dark)}
@@ -144,10 +145,10 @@
  .contact-section .contact-pill{width:100%;min-width:0}
  .footer-inner{gap:var(--space-md)}
 }
-@media(hover:none) and (prefers-reduced-motion:no-preference){.contact-section .contact-pill:active{transform:scale(.97)}}
+@media(hover:none) and (prefers-reduced-motion:no-preference){.pill-action:active{transform:scale(.97)}}
 @media print{.contact-footer{display:none}}
 @supports not (clip-path:circle(0% at 50% 100%)){
  .hero-sun-fill{display:none}
  .portrait-hero .hero-sun-action:is(:hover,:focus-visible,:active){background:var(--hero-orange);color:var(--hero-orange-ink)}
- .contact-section .contact-pill:is(:hover,:focus-visible,:active){background:var(--hero-orange);color:var(--hero-orange-ink)}
+ .pill-action:is(:hover,:focus-visible,:active){background:var(--hero-orange);color:var(--hero-orange-ink)}
 }

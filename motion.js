@@ -96,8 +96,8 @@
   function pointerDepth() {
     if (!gs) return;
     const groups = [
-      { root: document.querySelector('.portrait-hero'), selector: '.magnetic-zone', badge: true, cap: 38, reach: 144, gap: 8, labelPull: .3, press: .95 },
-      { root: document.querySelector('.contact-section'), selector: '.contact-magnetic-zone', badge: false, cap: 22, reach: 96, gap: 6, labelPull: .22, press: .97 }
+      { root: document.querySelector('.portrait-hero'), selector: '.magnetic-zone', badge: false, cap: 38, reach: 144, gap: 8, labelPull: .3, press: .95 },
+      { root: document.body, selector: '.pill-magnetic-zone', badge: true, cap: 22, reach: 96, gap: 6, labelPull: .22, press: .97 }
     ].filter(group => group.root);
     pointerMedia = gs.matchMedia();
     pointerMedia.add('(hover: hover) and (pointer: fine) and (min-width: 961px) and (prefers-reduced-motion: no-preference)', () => {
@@ -144,6 +144,7 @@
             const y = distance ? dy / distance * pull : 0;
             // Keep neighboring magnetic targets separated as they attract.
             if (magnet.zone) for (const other of magnets.filter(item => item.zone && item !== magnet)) {
+              if (other.rect.top > r.top + r.height + group.cap || r.top > other.rect.top + other.rect.height + group.cap) continue;
               if (other.rect.left >= r.right && x > 0) x = Math.min(x, Math.max(0, other.rect.left - r.right - group.gap));
               if (other.rect.right <= r.left && x < 0) x = Math.max(x, -Math.max(0, r.left - other.rect.right - group.gap));
             }

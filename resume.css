@@ -1,0 +1,64 @@
+/* A compact, readable desktop overview; the original PDF is the download. */
+.resume-page .header-inner{min-height:56px}
+.cv-shell,.cv-footer,.resume-page .header-inner{max-width:1360px}
+.cv-shell{padding-block:8px 12px}
+.cv-back{font-size:14px;text-decoration:underline;text-underline-offset:.25em}
+.cv-heading{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-block:10px;border-block:1px solid var(--color-rule)}
+.cv-kicker{font-size:12px;letter-spacing:.08em;color:var(--color-accent);font-weight:600;margin-bottom:6px}
+.cv-heading h1{font-size:36px;line-height:1.05;margin-bottom:6px}
+.cv-subtitle{font-size:14px;line-height:1.4}
+.cv-links{display:flex;flex-direction:column;gap:8px;align-items:flex-end;font-size:14px;flex-shrink:0}
+.cv-links>div{display:flex;gap:20px}
+.cv-links a{text-decoration:underline;text-underline-offset:.25em}
+.cv-links .pill-action{text-decoration:none}
+.cv-summary{font-size:15px;line-height:1.4;margin-block:8px 12px;max-width:100%}
+.cv-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:32px;font-size:14px;line-height:1.4}
+.cv-grid h2{font-size:17px;font-weight:600;letter-spacing:-.015em;line-height:1.3;margin-bottom:6px}
+.cv-role+.cv-role{margin-top:16px;padding-top:12px;border-top:1px solid var(--color-rule)}
+.cv-role-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.cv-role-heading h3{font-size:16px;line-height:1.35;letter-spacing:0;font-weight:600;color:var(--color-accent)}
+.cv-role-heading h3 span{font-weight:400}
+.cv-role-heading>span{white-space:nowrap;font-size:12px;color:var(--color-muted)}
+.cv-role-title{margin-top:3px;font-size:13px;color:var(--color-muted)}
+.cv-role ul{padding-left:18px;margin-block:8px 0}
+.cv-role li+li{margin-top:6px}
+.cv-sidebar{border-left:1px solid var(--color-rule);padding-left:24px;display:flex;flex-direction:column;gap:12px}
+.cv-sidebar p+p{margin-top:6px}
+.cv-sidebar p{max-width:none}
+.cv-footer{font-size:12px;padding-block:12px;border-top:1px solid var(--color-rule);gap:12px}
+.cv-footer a{text-decoration:underline;text-underline-offset:.25em}
+@media(min-width:1100px) and (min-height:850px){
+ .cv-shell{padding-top:20px}.cv-heading{padding-block:20px 16px}
+ .cv-grid{font-size:16px;gap:40px;line-height:1.5}.cv-role li+li{margin-top:10px}.cv-sidebar{gap:20px}.cv-summary{margin-block:16px 20px}
+}
+@media(max-width:1100px){
+ .resume-page{--gutter:32px}.cv-grid{gap:24px}.cv-role-heading{flex-wrap:wrap;gap:2px 12px}.cv-heading{gap:16px}.cv-heading h1{font-size:36px}
+}
+@media(min-width:801px) and (max-width:1100px){
+ .cv-heading{padding-block:8px}.cv-links{gap:6px}.cv-summary{font-size:14px;margin-block:6px 10px}
+ .cv-grid{line-height:1.35}.cv-sidebar{gap:10px}.cv-role ul{margin-top:6px}
+}
+@media(max-width:800px){
+ .resume-page{--gutter:16px}
+ .cv-heading{align-items:flex-start;flex-direction:column}.cv-links{align-items:flex-start;gap:10px}
+ .cv-grid{grid-template-columns:minmax(0,1fr);font-size:16px;line-height:1.55}
+ .cv-sidebar{padding-left:0;border-left:0;border-top:1px solid var(--color-rule);padding-top:20px;gap:20px}
+ .cv-grid h2{font-size:19px}.cv-role-heading h3{font-size:18px}.cv-role-heading>span,.cv-role-title{font-size:14px}
+ .cv-role+.cv-role{margin-top:24px;padding-top:20px}.cv-summary{font-size:16px}.cv-heading h1{font-size:36px}
+ .cv-role-heading{flex-direction:column;gap:4px}
+ .resume-page .header-inner{flex-wrap:nowrap;padding-block:6px;gap:12px}.resume-page .header-inner nav{width:auto;gap:12px}
+ .resume-page .wordmark{font-size:14px}.resume-page nav a{font-size:13px}
+ .cv-footer{padding-block:16px}
+}
+@media(max-width:360px){
+ .cv-heading h1{font-size:32px}
+ .resume-page .header-inner{flex-wrap:wrap}.resume-page .header-inner nav{width:100%}
+}
+@media print{
+ .cv-links .pill-magnetic-zone,.resume-page .resume-site-header,.cv-footer{display:none}
+ .cv-shell{max-width:none;padding:0}.cv-heading{padding-top:0;border-top:0}
+ .cv-grid{grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);font-size:10pt;gap:20px}
+ .cv-heading h1{font-size:28pt}.cv-links,.cv-subtitle,.cv-summary{font-size:10pt}
+ .cv-grid h2{font-size:12pt}.cv-role-heading h3{font-size:11pt}.cv-sidebar{padding-left:16px}
+ .cv-role,.cv-sidebar section{break-inside:avoid}
+}
