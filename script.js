@@ -17,27 +17,42 @@ if ('IntersectionObserver' in window) {
   sections.forEach(section => observer.observe(section));
 }
 
-// A continuous name marquee with explicit pause and reduced-motion support.
+// Animation runs automatically. Escape provides a keyboard pause without extra UI.
+window.portfolioMotionPaused = false;
+const motionHelp = document.createElement('p');
+motionHelp.id = 'motion-help';
+motionHelp.className = 'visually-hidden';
+motionHelp.textContent = 'Animations run automatically. Press Escape to pause or resume animation.';
+document.body.prepend(motionHelp);
+const motionStatus = document.createElement('span');
+motionStatus.className = 'visually-hidden';
+motionStatus.setAttribute('role', 'status');
+document.body.append(motionStatus);
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || event.defaultPrevented) return;
+  window.portfolioMotionPaused = !window.portfolioMotionPaused;
+  document.documentElement.classList.toggle('motion-paused', window.portfolioMotionPaused);
+  motionStatus.textContent = window.portfolioMotionPaused ? 'Animations paused. Press Escape to resume.' : 'Animations resumed.';
+  window.dispatchEvent(new CustomEvent('portfolio:motion-pause'));
+});
+
+// The continuous name keeps hover, focus, offscreen and reduced-motion behavior.
 const portraitHero = document.querySelector('.portrait-hero');
 if (portraitHero) {
+  portraitHero.setAttribute('aria-describedby', 'motion-help');
   const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
   const marquee = portraitHero.querySelector('.name-marquee');
-  const toggle = portraitHero.querySelector('.name-toggle');
-  const motion = { visible: true, held: false, hover: false, focus: false };
+  const motion = { visible: true, hover: false, focus: false };
   const syncNameMotion = () => {
     const reduced = motionPreference.matches;
     portraitHero.classList.toggle('name-enhanced', !reduced);
     marquee.hidden = reduced;
-    toggle.hidden = reduced;
-    const running = !reduced && motion.visible && !motion.held &&
+    const running = !reduced && motion.visible && !window.portfolioMotionPaused &&
       !motion.hover && !motion.focus && !document.hidden;
     portraitHero.classList.toggle('name-is-running', running);
-    toggle.textContent = motion.held ? 'Play name' : 'Pause name';
-    toggle.setAttribute('aria-label', motion.held ? 'Play scrolling name' : 'Pause scrolling name');
-    toggle.setAttribute('aria-pressed', String(motion.held));
     portraitHero.dispatchEvent(new CustomEvent('portfolio:marquee-motion', { detail: { running, reduced } }));
   };
-  toggle.addEventListener('click', () => { motion.held = !motion.held; syncNameMotion(); });
+  window.addEventListener('portfolio:motion-pause', syncNameMotion);
   marquee.addEventListener('pointerenter', () => { motion.hover = true; syncNameMotion(); });
   marquee.addEventListener('pointerleave', () => { motion.hover = false; syncNameMotion(); });
   portraitHero.addEventListener('focusin', () => { motion.focus = true; syncNameMotion(); });

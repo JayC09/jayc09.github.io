@@ -7,8 +7,7 @@
  'use strict';
  const hero = document.querySelector('.slats-hero');
  const container = hero?.querySelector('.slats-field');
- const button = hero?.querySelector('.background-toggle');
- if (!hero || !container || !button || !window.PortfolioOGL) return;
+ if (!hero || !container || !window.PortfolioOGL) return;
  const {Renderer,Program,Mesh,Triangle,RenderTarget,Texture} = PortfolioOGL;
  const SWELL_PRESETS = {
   swell: {
@@ -849,24 +848,20 @@ void main() {
 
 
    
-    let held = false;
+    let held = !!window.portfolioMotionPaused;
     const syncPause = () => {
       reducedMotion = motionPreference.matches;
+      held = !!window.portfolioMotionPaused;
       settings.paused = held || reducedMotion;
-      button.hidden = reducedMotion;
-      button.textContent = held ? 'Play background' : 'Pause background';
-      button.setAttribute('aria-pressed', String(held));
-      button.setAttribute('aria-label', held ? 'Play interactive background' : 'Pause interactive background');
       if (settings.paused) {
         cancelAnimationFrame(raf); raf = 0; splats.length = 0; fluidUntil = 0;
         pointer.tracked = false;
       }
       if (!held || reducedMotion) start();
     };
-    const toggle = () => { held = !held; syncPause(); };
     const contextLost = event => {
       event.preventDefault(); alive = false; cancelAnimationFrame(raf); raf = 0;
-      container.classList.remove('is-webgl'); button.hidden = true;
+      container.classList.remove('is-webgl');
     };
     const contextRestored = () => { destroy(); mount(); };
     const destroy = () => {
@@ -878,16 +873,16 @@ void main() {
       window.removeEventListener('blur', onPointerLeave);
       document.removeEventListener('visibilitychange', onVisibility);
       motionPreference.removeEventListener('change', syncPause);
-      button.removeEventListener('click', toggle);
+      window.removeEventListener('portfolio:motion-pause', syncPause);
       canvas.removeEventListener('webglcontextlost', contextLost);
       canvas.removeEventListener('webglcontextrestored', contextRestored);
       disposeFluid(); dispose(fieldTarget); geometry.remove();
       for (const mesh of [fieldMesh,slatMesh,splatPass,curlPass,vorticityPass,divergencePass,pressurePass,projectPass,advectPass,scalePass]) mesh.program.remove();
       gl.deleteTexture(blank.texture);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
-      canvas.remove(); container.classList.remove('is-webgl'); button.hidden = true;
+      canvas.remove(); container.classList.remove('is-webgl');
     };
-    button.addEventListener('click', toggle);
+    window.addEventListener('portfolio:motion-pause', syncPause);
     motionPreference.addEventListener('change', syncPause);
     canvas.addEventListener('webglcontextlost', contextLost);
     canvas.addEventListener('webglcontextrestored', contextRestored);
@@ -898,7 +893,7 @@ void main() {
  let engine;
  function mount() {
    try { engine = create(); } catch(error) {
-     container.classList.remove('is-webgl'); button.hidden = true;
+     container.classList.remove('is-webgl');
      container.querySelectorAll('canvas').forEach(canvas => {canvas.getContext('webgl2')?.getExtension('WEBGL_lose_context')?.loseContext();canvas.remove();});
      console.warn('Interactive background unavailable; static slats remain.', error);
    }

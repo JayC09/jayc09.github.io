@@ -99,3 +99,13 @@ Edit slats.css for colors and the text-protection veil. Edit the settings object
 Background and name have independent pause controls. Rendering stops offscreen and when the document is hidden. Reduced motion gives a still field; missing WebGL or JavaScript gives a CSS slat pattern. The background never intercepts normal links, focus, taps or scrolling. All case-study interactions and resume printing remain available.
 
 The portrait version is backed up on codex/backup-before-micro-slats-2026-11-18 at commit 132552565aab8d41adf02f9c595200723d788f66. Restore through a new commit to preserve history.
+
+## Compact Work experience update
+
+The current homepage centers and enlarges the employer identities, removes the standalone highlight strip and combines Myntra and Oracle into two compact cards under Work experience. They sit side by side on desktop and stack on mobile. Reported time saved, migration runtime and experience duration remain in the cards. The duplicate timeline is removed, with #experience preserved as an anchor alias for #work. Groww remains a separate independent study in progress.
+
+refinements.css controls the denser spacing, card grid, static Oracle chart and automatic conceptual quote-consolidation animation. The Myntra visual illustrates WhatsApp, email and Excel quotes arriving in one shared dashboard; it contains no actual vendor data. Detailed case-study content remains available through the case-study links. Oracle's runtime remains under 30 minutes, not an exact 30-minute claim.
+
+Animation, replay, organize and comparison buttons are removed. Motion runs automatically; Escape pauses or resumes continuous motion, and reduced-motion preferences show static views. The new loop pauses offscreen or when the document is hidden. Native navigation, research/background disclosures and resume printing remain available. MOTION.md describes the current behavior.
+
+The previous public version is preserved on codex/backup-before-compact-experience-2026-11-18 at commit 40e1820522b06ecc3f1ae6f0774c696e0c1669af.

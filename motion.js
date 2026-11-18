@@ -7,7 +7,6 @@
   const pointer = matchMedia('(hover: hover) and (pointer: fine) and (min-width: 961px)');
   const lifecycle = new AbortController();
   const observers = [], animations = new Set(), frames = new Set(), timers = new Set();
-  const flowPlayers = new WeakMap();
   let pointerMedia;
   const all = (selector, root = document) => [...root.querySelectorAll(selector)];
   const on = (node, event, fn, options = {}) => node.addEventListener(event, fn, { ...options, signal: lifecycle.signal });
@@ -29,7 +28,7 @@
   }
   function to(target, options) {
     const { duration, delay, ease, stagger, onComplete, overwrite, ...end } = options;
-    if (!gs || preference.matches) { set(target, end); onComplete?.(); return null; }
+    if (!gs || preference.matches || window.portfolioMotionPaused) { set(target, end); onComplete?.(); return null; }
     let animation;
     animation = gs.to(target, { ...options, onInterrupt: () => animations.delete(animation), onComplete: () => { animations.delete(animation); onComplete?.(); } });
     animations.add(animation);
@@ -44,136 +43,25 @@
     observer.observe(node); observers.push(observer);
   }
 
-  function quoteComparisons() {
-    all('[data-quote-demo]').forEach(demo => {
-      const tiles = all('.quote-tile', demo), button = demo.querySelector('button'), status = demo.querySelector('[role="status"]');
-      let pinned = false, hovering = false;
-      const positions = [{ x: -3, y: 7, rotation: -5 }, { x: 0, y: -5, rotation: 3 }, { x: 3, y: 5, rotation: -3 }];
-      const draw = instant => {
-        const organized = pinned || hovering;
-        demo.classList.toggle('is-organized', organized);
-        tiles.forEach((tile, index) => {
-          const pose = organized ? { x: 0, y: 0, rotation: 0 } : positions[index];
-          if (instant) set(tile, pose); else to(tile, { ...pose, duration: .6, ease: 'back.out(1.25)', overwrite: true });
-        });
-        button.setAttribute('aria-pressed', String(pinned));
-        button.textContent = pinned ? 'Scatter quotes' : 'Organize quotes';
-        status.textContent = organized ? 'Shared fields, ready to compare' : 'Separate quotations';
-      };
-      on(button, 'click', () => { pinned = !pinned; hovering = false; draw(false); });
-      on(demo.querySelector('.quote-stage'), 'pointerenter', event => { if (event.pointerType === 'mouse' && pointer.matches) { hovering = true; draw(false); } });
-      on(demo.querySelector('.quote-stage'), 'pointerleave', () => { hovering = false; draw(false); });
-      draw(true); button.hidden = false;
-    });
-  }
-
-  function migrationComparisons() {
-    all('[data-migration-demo]').forEach(demo => {
-      const button = demo.querySelector('button'), bar = demo.querySelector('.migration-bar'), finish = demo.querySelector('.migration-finish'), status = demo.querySelector('[role="status"]');
-      let after = false, movement, completion;
-      const show = next => {
-        after = next; stop(movement); stop(completion);
-        demo.classList.toggle('is-after', after);
-        button.setAttribute('aria-pressed', String(after));
-        button.textContent = after ? 'Replay comparison' : 'Show automation';
-        status.textContent = after ? 'After: under 30 minutes' : 'Before: approximately 3+ hours';
-        set(finish, { opacity: 0 });
-        movement = to(bar, { scaleX: after ? .16 : 1, duration: .75, ease: 'power3.inOut', overwrite: true,
-          onComplete: () => {
-            if (after && !preference.matches && gs) {
-              set(finish, { opacity: .35 });
-              completion = to(finish, { opacity: 0, duration: .45, ease: 'power2.out' });
-            }
-          }
-        });
-      };
-      on(button, 'click', () => {
-        if (!after) { show(true); return; }
-        // Replay starts at the same labelled baseline, without counting to a false exact result.
-        stop(movement); set(bar, { scaleX: 1 }); show(true);
-      });
-      button.hidden = false;
-      if (demo.closest('#results')) onceVisible(demo, () => show(true));
-    });
-    all('[data-results-chart]').forEach(chart => {
-      const bar = chart.querySelector('.after-bar');
-      onceVisible(chart, () => {
-        if (!gs || preference.matches) return;
-        set(bar, { scaleX: 0, transformOrigin: 'left center' });
-        to(bar, { scaleX: 1, duration: .75, ease: 'power3.out' });
-      });
-    });
-  }
-
-  function fundComparison() {
-    all('[data-fund-demo]').forEach(demo => {
-      const button = demo.querySelector('button'), cards = all('.fund-card', demo), question = demo.querySelector('.fund-question'), status = demo.querySelector('[role="status"]');
-      let comparing = false;
-      const draw = () => {
-        demo.classList.toggle('is-comparing', comparing);
-        cards.forEach((card, index) => to(card, { x: comparing ? (index ? -6 : 6) : 0, duration: .6, ease: 'back.out(1.2)', overwrite: true }));
-        to(question, { opacity: comparing ? 1 : .55, scale: comparing ? 1.12 : 1, duration: .45, ease: 'power2.out', overwrite: true });
-        button.setAttribute('aria-pressed', String(comparing));
-        button.textContent = comparing ? 'Reset comparison' : 'Explore the comparison';
-        status.textContent = comparing ? 'Different asset classes. What context would make comparison useful?' : 'What makes a comparison useful?';
-      };
-      on(button, 'click', () => { comparing = !comparing; draw(); });
-      button.hidden = false;
-    });
-  }
-
-  function architecture() {
-    all('.architecture').forEach(diagram => {
-      const choices = all('[data-architecture-choice]', diagram), cards = all('.study-cards article', diagram), status = diagram.querySelector('[role="status"]');
-      if (!choices.length) return;
-      let pinned = -1;
-      const draw = index => {
-        if (index < 0) delete diagram.dataset.exploring; else diagram.dataset.exploring = String(index);
-        cards.forEach((card, i) => { card.classList.toggle('is-related', i === index); card.classList.toggle('is-unrelated', index >= 0 && i !== index); });
-        choices.forEach((button, i) => button.setAttribute('aria-pressed', String(i === pinned)));
-        status.textContent = index < 0 ? 'Explore how each capability connects to the shared data and workflow logic.' : `Shared data → workflow logic → ${choices[index].textContent}.`;
-      };
-      choices.forEach((button, index) => {
-        button.disabled = false;
-        on(button, 'pointerenter', event => { if (event.pointerType === 'mouse') draw(index); });
-        on(button, 'pointerleave', () => draw(pinned));
-        on(button, 'focus', () => draw(index));
-        on(button, 'blur', () => draw(pinned));
-        on(button, 'click', () => { pinned = pinned === index ? -1 : index; draw(pinned); });
-        on(button, 'keydown', event => { if (event.key === 'Escape') { pinned = -1; draw(-1); } });
-      });
-    });
-  }
-
-  function workflowSwitch() {
-    all('[data-workflow-switch]').forEach(switcher => {
-      const container = switcher.querySelector('.workflow-panels'), panels = all('.workflow-panel', switcher), buttons = all('[data-workflow-state]', switcher), status = switcher.querySelector('.workflow-status');
-      const select = (state, animate = true) => {
-        panels.forEach(panel => {
-          const active = panel.id === `workflow-${state}`;
-          panel.dataset.active = String(active); panel.inert = !active;
-          panel.setAttribute('aria-hidden', String(!active));
-          if (active && animate) {
-            gs?.killTweensOf(panel);
-            if (gs && !preference.matches) { set(panel, { opacity: .4, y: 8 }); to(panel, { opacity: 1, y: 0, duration: .45, ease: 'power2.out', overwrite: true }); }
-            flowPlayers.get(panel)?.();
-          }
-        });
-        buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.workflowState === state)));
-        status.textContent = state === 'after' ? 'After: automated execution, with exception handling and review.' : 'Before: manual dependencies, with repeated execution steps.';
-      };
-      container.classList.add('is-enhanced'); select('before', false);
-      buttons.forEach(button => on(button, 'click', () => select(button.dataset.workflowState)));
-      switcher.querySelector('.workflow-toggle').hidden = false;
+  function consolidationLoops() {
+    all('.quote-consolidation').forEach(figure => {
+      let visible = false;
+      const sync = () => figure.classList.toggle('is-suspended', !visible || document.hidden);
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(([entry]) => {
+          visible = entry.isIntersecting;
+          if (visible) figure.classList.add('is-looping');
+          sync();
+        }, { threshold: .1 });
+        observer.observe(figure); observers.push(observer);
+      } else { visible = true; figure.classList.add('is-looping'); }
+      on(document, 'visibilitychange', sync); sync();
     });
   }
 
   function workflows() {
     all('[data-workflow]').forEach(figure => {
       const steps = all('.flow li', figure);
-      const toolbar = document.createElement('div'); toolbar.className = 'motion-toolbar';
-      const button = document.createElement('button'); button.className = 'motion-control'; button.type = 'button'; button.textContent = 'Replay workflow';
-      toolbar.append(button); figure.querySelector('figcaption').before(toolbar);
       let animation;
       const play = () => {
         if (figure.dataset.active === 'false') return false;
@@ -181,24 +69,24 @@
         set(steps, { '--step-fill': 0 });
         animation = to(steps, { '--step-fill': 1, duration: .35, stagger: .15, ease: 'power2.out', overwrite: true });
       };
-      flowPlayers.set(figure, play); on(button, 'click', play); onceVisible(figure, play);
+      onceVisible(figure, play);
     });
   }
 
   function reveals() {
     if (!gs) return;
     const groups = [];
-    for (const selector of ['.highlights', '.skills', '.study-impact']) {
+    for (const selector of ['.skills', '.study-impact']) {
       const root = document.querySelector(selector); if (root) groups.push([root, [...root.children]]);
     }
-    all('#work .section-heading,.project,.experience-row,#about .about-grid,.contact-section,.study-next').forEach(root => {
+    all('.project,#about .about-grid,.contact-section,.study-next').forEach(root => {
       const targets = root.classList.contains('project') ? all('.project-heading,.project-body', root) : [root];
       groups.push([root, targets]);
     });
     groups.forEach(([root, targets]) => {
       targets.forEach(target => target.setAttribute('data-motion-reveal', ''));
       onceVisible(root, () => {
-        if (preference.matches) return;
+        if (preference.matches || window.portfolioMotionPaused) return;
         set(targets, { opacity: 0, y: 18 });
         to(targets, { opacity: 1, y: 0, duration: .65, stagger: .09, ease: 'power3.out', overwrite: true });
       });
@@ -225,6 +113,7 @@
       const reset = () => { badgeX(0); badgeY(0); lightX(0); lightY(0); magnets.forEach(magnet => { magnet.x(0); magnet.y(0); magnet.lx(0); magnet.ly(0); }); };
       const update = () => {
         pending = 0;
+        if (window.portfolioMotionPaused) return;
         const nx = Math.max(-1, Math.min(1, (point.x - rect.left) / rect.width * 2 - 1));
         const ny = Math.max(-1, Math.min(1, (point.y - rect.top) / rect.height * 2 - 1));
         badgeX(nx * 5); badgeY(ny * 5); lightX(nx * -9); lightY(ny * -9);
@@ -299,9 +188,15 @@
   }
 
   // Each enhancement fails independently; a missing animation engine never hides content.
-  for (const feature of [quoteComparisons, migrationComparisons, fundComparison, architecture, workflowSwitch, workflows, reveals, pointerDepth, marqueePolish, readingProgress]) {
+  for (const feature of [consolidationLoops, workflows, reveals, pointerDepth, marqueePolish, readingProgress]) {
     try { feature(); } catch (error) { console.warn(`Portfolio enhancement unavailable: ${feature.name}`, error); }
   }
+  on(window, 'portfolio:motion-pause', () => {
+    if (window.portfolioMotionPaused) {
+      for (const animation of [...animations]) { animation.progress(1); animation.kill(); }
+      animations.clear();
+    }
+  });
   on(preference, 'change', () => {
     if (preference.matches) {
       for (const animation of [...animations]) { animation.progress(1); animation.kill(); }

@@ -1,57 +1,51 @@
-# Portfolio v3 motion
+# Portfolio motion and compact experience
 
-This is an optional interaction layer over the existing portfolio. Professional content, typography, contact destinations, section IDs, diagrams and print handler remain in place. The portrait was subsequently replaced by the owner's requested Micro Slats background.
+The current site keeps the slat hero, white scrolling name, company branding and professional facts, with a compact desktop overview and fewer controls.
 
-## Implementation map
+## Homepage structure
 
-| Effect | Existing target | Implementation |
-| --- | --- | --- |
-| Magnetic actions | .portrait-actions a | Stable .magnetic-zone wrappers, maximum 8px tracking, labels at 30% of that displacement, 440ms soft return and 150–200ms compression |
-| Hero depth | .portrait-hero, .education-badge | Desktop badge depth up to 5px; the former portrait and background-highlight elements are removed |
-| Interactive slat field | .slats-hero, .slats-field | React Bits Micro Slats adapted to vanilla JavaScript, green slats on charcoal, cursor/tap fluid response and independent background pause/play |
-| Name polish | .name-track | Original CSS animation remains; Web Animations playback-rate updates ease resume and desktop scrolling from base speed to at most 1.35× |
-| Scroll reveals | Highlights, work heading and introductions, experience, about, skills, contact, study impact and next project | IntersectionObserver once, 18px rise, 650ms duration, 90ms sibling stagger; default content is visible |
-| Myntra comparison | Homepage .project-body, case-study .interface-demo | Three generic quotation tiles settle into shared fields; native button toggles/replays and desktop tile hover previews the organization |
-| Oracle timing | Homepage .project-body, #results | A conceptual bar changes from the approximate 3+ hour baseline to an illustrative under-30-minute representation; labels never count to an exact result |
-| Groww question | Homepage .project-body | Two explicitly conceptual equity/debt cards approach, highlight different characteristics and ask for context; the study remains independent and in progress |
-| Myntra workflows | .study-figure[data-workflow] | Logical step-line highlighting with a 150ms stagger; replay buttons; AI sequence ends in the existing human-review/approval stages |
-| Architecture | .architecture | Native buttons inside the original headings support hover, focus and pinned relationships; Escape clears selection; text remains readable |
-| Vendor table | .interface-demo tbody tr | Hover and keyboard-focus row highlighting, native table semantics preserved |
-| Oracle workflows | #before .workflow-switch | Native Before/After button group switches the existing generalized diagrams; inactive panel is inert and excluded from the accessibility tree; both are visible without JavaScript |
-| Reading progress | Both .study-body pages | Passive scroll listener schedules one animation frame, uses cached section bounds, updates a 3px decorative line and aria-current on the existing table of contents |
-| Shared feedback | Navigation, links, buttons, details | Underline and arrow feedback, press compression and progressive native details-content opacity transitions |
+- The introduction and enlarged Myntra/Oracle logos are centered.
+- Work experience uses two employer cards on desktop and a single column on mobile. It replaces the old highlights strip, selected-work index and duplicate experience timeline.
+- Reported Myntra time saved, Oracle migration runtime and approximate experience duration are in the cards. The native #experience anchor remains an alias at #work.
+- Groww remains separate as an independent study in progress. Original case-study pages, contacts, education and resume printing remain available.
+- refinements.css owns this layout, spacing and the conceptual sourcing visual. Existing style.css, tokens.css, base.css and motion.css retain the shared system.
 
-## Dependencies and editing
+## Automatic motion
 
-GSAP core 3.15.1 is pinned at assets/vendor/gsap-3.15.1.min.js and served by the same origin. It is used for retargetable springs, short sequences and interrupted-state transitions. Its original header is retained. Source and the GSAP Standard No Charge License are linked in assets/vendor/NOTICE.md. This is not MIT-licensed GSAP. No code from free-gsap-effects is copied.
+| Target | Behavior |
+| --- | --- |
+| .slats-field | Locally hosted WebGL waves and pointer/tap ripples; stops offscreen or hidden |
+| .name-track | Existing right-to-left loop, hover/focus pause, offscreen pause and soft playback-rate easing |
+| .quote-consolidation | Seven-second CSS loop: generic WhatsApp, email and Excel quote tiles enter one shared dashboard; caption is always readable |
+| Myntra .flow | One-time sequential highlighting when the diagram enters view, without replay controls |
+| Skills and other introductory blocks | One-time 18px/650ms entrance with a 90ms sibling stagger; employer records stay immediately visible |
+| Hero circular actions | Small desktop magnetic displacement, delayed label response and press feedback |
+| Case-study reading column | Subtle progress line and aria-current on the existing table of contents |
+| Navigation, links and details | CSS underline, arrow, press and progressive native disclosure feedback |
 
-ScrollTrigger is unnecessary for these one-time intersections and reading progress; IntersectionObserver and a passive, frame-scheduled listener cover them. Draggable and inertia are deliberately omitted to preserve the existing marquee's pause/focus/offscreen behavior and reliable looping. There is no scroll-jacking or delayed page navigation.
+Oracle's time comparisons are static. Its original Before and After workflow figures are both readable without a toggle. Architecture headings are plain text. Organize, replay, comparison and visible motion-pause controls are removed at the owner's request.
 
-Keep .name-is-running, the native name pause button and script.js as the source of truth for marquee playback. motion.js listens to the portfolio:marquee-motion event; it changes rate through updatePlaybackRate without changing currentTime or reinitializing the loop. If that API is unavailable, the original constant-speed loop continues.
+Escape toggles motion globally through portfolio:motion-pause. script.js supplies screen-reader instructions and status, pauses the name and adds .motion-paused for CSS loops. micro-slats.js listens to the same event and stops frame scheduling. No extra visible button is required. Finite entrances settle to readable end states when motion is paused. Reduced-motion preferences disable continuous motion and show the static sourcing illustration. All content is visible without JavaScript; the slat field has a CSS fallback if WebGL is unavailable.
 
-motion.css owns motion timing tokens. motion.js keeps each feature scoped, registers listeners once through AbortController, unobserves completed one-time entrances and cleans up on a non-persisted page exit. Native browser back/forward cache is retained. GSAP pointer contexts revert when touch, viewport or motion preferences change. Stopped/interrupted tweens are removed from the owned-animation registry.
+## Editing
 
-## Accessibility and failure behavior
+- Employer copy and links: index.html, .work-card.
+- Desktop density and card sizing: refinements.css, .experience-grid and .work-card.
+- Sourcing channels and caption: .quote-consolidation in index.html and projects/myntra.html. Keep the conceptual disclosure. Animation timing is --consolidation-cycle in refinements.css.
+- Oracle chart: .migration-comparison on the homepage and the original .time-chart in projects/oracle.html. Keep the <30 min bound and original explanatory captions.
+- Name and keyboard motion state: script.js. Keep hover/focus/offscreen and reduced-motion support.
+- Pointer responses, observers and reading progress: motion.js. Features are scoped and listeners/observers are cleaned up on non-persisted exits.
+- Background palette: slats.css. Wave settings and GPU budgets: micro-slats.js. Keep the contrast veil, 1.8-million-pixel budget and visibility checks.
+- Change shared file query versions in all applicable HTML pages when updating shared assets.
 
-- Reduced motion disables pointer effects and the continuous name, completes active finite effects, and makes diagram state changes instant. The slat field renders once without continuous animation. Essential text is never animated out of view.
-- Controls use real buttons, visible focus, state attributes and native activation. New controls hidden in source are shown only after their handlers are registered. The architecture's source buttons are disabled until they become functional.
-- Hover is optional. Quote organization, fund comparisons, Oracle diagrams and workflow replays work with keyboard or touch. Conceptual labels remain visible.
-- Without GSAP, diagram controls and reading progress still work instantly; reveals and pointer effects are skipped. Without any JavaScript, the original static name, original diagrams, routes, contacts and native details remain accessible; both Oracle workflows are visible.
-- Native details opening/closing uses opacity and discrete content-visibility where supported. Other browsers retain the native immediate toggle. No height interpolation is forced.
-- Print styles hide motion-only controls and progress indicators and restore readable workflow panels. The resume uses its original print handler and does not load GSAP.
+## Dependencies and attribution
 
-## Verification scope
+GSAP core 3.15.1 and the selected OGL 1.0.11 browser bundle are pinned and served locally. The website requires no package installation, React or build process. The resume loads neither animation library. Native IntersectionObserver and passive, frame-scheduled scroll listeners avoid a ScrollTrigger dependency.
 
-Local checks cover preserved professional copy/links/IDs, all four routes at 320px, 390px, 834px and 1440px, pointer limits and reset, stable portrait framing, marquee pause/resume, touch controls, keyboard states, workflow replay, reading progress, active sections, direct refresh/history, reduced motion, blocked GSAP, no JavaScript and resume printing. Axe WCAG A/AA checks and unthrottled Chrome lab performance observations are recorded locally in .hallmark/motion-v3/. These are lab observations, not field Core Web Vitals or a cross-browser certification.
+Micro Slats is adapted from React Bits by David Haz, revision d01aa914dcbe76da8b2923ebf872b5c8b1066e4c, and embedded as part of this portfolio. The MIT + Commons Clause license is retained in assets/vendor/REACT-BITS-LICENSE.md. OGL is Unlicense/public domain, with its terms in assets/vendor/OGL-LICENSE.txt. GSAP's original header and license link remain. See assets/vendor/NOTICE.md.
 
-The pre-upgrade public version is on codex/backup-before-motion-v3-2026-11-18 at commit 67156fa72ebb2152153e8166f9369974e1356324. No force-push is needed to restore it.
+## Backups and verification
 
-## Micro Slats replacement
+The version before this compact overview is preserved on codex/backup-before-compact-experience-2026-11-18 at commit 40e1820522b06ecc3f1ae6f0774c696e0c1669af. Earlier portrait and motion-upgrade backups remain. Restore through a new commit without rewriting history.
 
-The current homepage loads slats.css, assets/vendor/ogl-1.0.11.min.js and micro-slats.js after the existing motion layer. These are static browser assets; no React, installation, server-side rendering or build step is required. The local preparation bundle keeps only the six OGL exports used by the effect. The website makes no third-party library requests.
-
-Colors are --slats-background, --slats-color and --slats-glint in slats.css. The overlay veil protects white navigation, action and name text. Dimensions, speed and interaction intensity are in the settings object in micro-slats.js. CSS provides the static slat fallback. The background control is only revealed after the renderer initializes, and is hidden if WebGL becomes unavailable. Context restoration remounts the renderer. Listeners, frame requests, observers and GPU resources are released on a non-persisted page exit.
-
-The React Bits shader and fluid logic are adapted under its MIT + Commons Clause license, with the full license retained at assets/vendor/REACT-BITS-LICENSE.md. This port is embedded as part of this portfolio, not distributed as a component product. OGL is Unlicense/public-domain software; its terms are included in assets/vendor/OGL-LICENSE.txt. Source revision and dependency details are in assets/vendor/NOTICE.md.
-
-The previous portrait version is preserved on codex/backup-before-micro-slats-2026-11-18 at commit 132552565aab8d41adf02f9c595200723d788f66. Original photo files remain in the repository but are no longer requested by the homepage.
+Local verification checks that both employer cards fit one viewport at 1280x800, 1366x768, 1440x900 and 1920x1080, then tests all four routes at 320px, 390px, 834px and 1440px. It also covers automatic looping, static Oracle bars, no extra buttons, keyboard pause, reduced motion, no JavaScript, case-study links, both Oracle workflows, reading progress and print. Axe WCAG A/AA scans supplement those browser checks; these are lab checks, not a cross-browser certification.
