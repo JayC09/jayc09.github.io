@@ -1,0 +1,14 @@
+.hallmark/qa/
+.hallmark/before/
+.hallmark/after/
+.hallmark/reference/
+.hallmark/*.json
+.hallmark/*.txt
+.hallmark/compare.html
+**/.hallmark/shots/
+**/.hallmark/before/
+**/.hallmark/compare.html
+.hallmark/redesign.cjs
+.hallmark/finalize.cjs
+.hallmark/check.cjs
+.hallmark/interaction-check.cjs

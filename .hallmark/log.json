@@ -1,0 +1,39 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "site",
+  "genre": "editorial",
+  "job": "hire",
+  "shape": "Marquee Hero",
+  "theme": "brand",
+  "axes": "cool paper/grotesk/restrained green",
+  "hero": "Ledge",
+  "nav": "wordmark and text links",
+  "footer": "dark contact close",
+  "imagery": "existing company logos and factual diagrams",
+  "photos": [],
+  "entry": "index.html",
+  "fingerprint": "Bottom-aligned|Asymmetric spans|Hairline and paper shifts|Outlined secondary|None|None",
+  "sections": [
+   "identity",
+   "reported highlights",
+   "selected work",
+   "experience",
+   "about and credentials",
+   "contact"
+  ],
+  "signature": "Jay Chaudhary at nameplate scale with MBA identity alongside",
+  "waived": [
+   "59 (resume)",
+   "77 (resume and facts band)",
+   "78 (resume)"
+  ],
+  "prompt": "Redesign Jay Chaudhary's PM portfolio with the supplied Dennis Snellenberg reference; preserve content, brand identities, links and a backup",
+  "heroReview": "fix: scale resolved, source logo grounds retained",
+  "finishReview": "fix: three findings resolved",
+  "mechanical": "0 FAIL, 0 unresolved REFLEX",
+  "backup": "codex/backup-before-hallmark-2026-11-17",
+  "date": "2026-11-18"
+ }
+]

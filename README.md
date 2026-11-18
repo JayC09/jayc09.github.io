@@ -57,3 +57,13 @@ Logo source files (unmodified PNG images embedded in self-contained SVG containe
 - Oracle: https://www.oracle.com/a/pr/docs/oracle-logo.zip (official Oracle News resources download).
 
 assets/myntra-logo.svg and assets/oracle-logo.svg are served locally. Keep the supplied proportions and white logo panels. Company logos identify past experience; they are not endorsement claims.
+
+## Hallmark redesign, 18 November 2026
+
+The existing four pages now share a name-led editorial system inspired by the supplied Dennis Snellenberg reference. No third-party imagery, source code, or portrait is copied. MBA identity, reported outcomes, company logo assets, brand accents, case studies, contact destinations, section IDs, script selectors and the resume print handler are preserved.
+
+Shared presentation lives in style.css, tokens.css and base.css. The DM Sans font files are self-hosted in assets/ with their SIL Open Font License. The site still needs no build step or backend. design.md records the common system. Project diagrams are available inside the original homepage project-note disclosures and on the dedicated case-study pages. Longer introductory copy remains in the About background disclosure.
+
+The previous public site is preserved on branch codex/backup-before-hallmark-2026-11-17, at commit 4e77d591859f0b8e5b7d8f0c53a3b66188879b29. To restore it, create a new commit on main that restores the files from that branch. Avoid force-pushing; keep later work reviewable.
+
+Hallmark validation records are stored locally in .hallmark/. .hallmark/copy-changes.md lists headline and punctuation adjustments. The local QA packages, source generators and screenshots are excluded from the deployed repository. No development packages are required by the public site.
