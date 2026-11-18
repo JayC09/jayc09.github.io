@@ -89,3 +89,13 @@ MOTION.md maps each effect to its selectors and describes accessibility, fallbac
 The existing portrait asset, professional claims, diagram captions, contacts, section IDs and routes are preserved. New quote and fund demonstrations are expressly conceptual and use no real vendor, quote, fund-return or client data. Oracle comparisons retain approximate baseline and strict under-30-minute labels without interpolated numeric claims. All original workflows remain readable with JavaScript disabled.
 
 The previous public version is preserved on codex/backup-before-motion-v3-2026-11-18 at commit 67156fa72ebb2152153e8166f9369974e1356324. Restore it with a new commit rather than rewriting main history.
+
+## Micro Slats homepage
+
+The portrait is now replaced by an interactive background adapted from https://reactbits.dev/backgrounds/micro-slats, with the existing name overlaid above it. The hero keeps the MBA badge, navigation and two circular actions. Photo assets stay archived but the portrait image and its preload are removed from index.html.
+
+Edit slats.css for colors and the text-protection veil. Edit the settings object in micro-slats.js for slat size, wave speed or interaction strength. The pinned, locally hosted OGL 1.0.11 browser bundle is assets/vendor/ogl-1.0.11.min.js. React Bits and OGL source/license notices are in assets/vendor/. No React or build process is required to edit, preview or deploy the site. Update the homepage's slats version queries when changing these files.
+
+Background and name have independent pause controls. Rendering stops offscreen and when the document is hidden. Reduced motion gives a still field; missing WebGL or JavaScript gives a CSS slat pattern. The background never intercepts normal links, focus, taps or scrolling. All case-study interactions and resume printing remain available.
+
+The portrait version is backed up on codex/backup-before-micro-slats-2026-11-18 at commit 132552565aab8d41adf02f9c595200723d788f66. Restore through a new commit to preserve history.

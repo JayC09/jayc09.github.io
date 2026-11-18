@@ -213,7 +213,7 @@
       const signal = new AbortController(), badge = hero.querySelector('.education-badge'), light = hero.querySelector('.depth-light');
       const bind = (node, event, fn) => node.addEventListener(event, fn, { signal: signal.signal, passive: true });
       hero.classList.add('has-depth');
-      const quick = (node, key, duration = .44) => gs.quickTo(node, key, { duration, ease: 'back.out(1.25)' });
+      const quick = (node, key, duration = .44) => node ? gs.quickTo(node, key, { duration, ease: 'back.out(1.25)' }) : () => {};
       set(badge, { '--depth-x': '0px', '--depth-y': '0px' });
       const badgeX = quick(badge, '--depth-x', .5), badgeY = quick(badge, '--depth-y', .5), lightX = quick(light, 'x', .55), lightY = quick(light, 'y', .55);
       const magnets = all('.magnetic-zone', hero).map(zone => {

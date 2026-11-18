@@ -1,13 +1,14 @@
 # Portfolio v3 motion
 
-This is an optional interaction layer over the existing portrait-led portfolio. The original content, portrait, typography, contact destinations, section IDs, diagrams and print handler remain in place.
+This is an optional interaction layer over the existing portfolio. Professional content, typography, contact destinations, section IDs, diagrams and print handler remain in place. The portrait was subsequently replaced by the owner's requested Micro Slats background.
 
 ## Implementation map
 
 | Effect | Existing target | Implementation |
 | --- | --- | --- |
 | Magnetic actions | .portrait-actions a | Stable .magnetic-zone wrappers, maximum 8px tracking, labels at 30% of that displacement, 440ms soft return and 150–200ms compression |
-| Hero depth | .portrait-hero, .education-badge | Pointer-driven background highlight up to 9px and badge up to 5px; portrait pixels and positioning are untouched |
+| Hero depth | .portrait-hero, .education-badge | Desktop badge depth up to 5px; the former portrait and background-highlight elements are removed |
+| Interactive slat field | .slats-hero, .slats-field | React Bits Micro Slats adapted to vanilla JavaScript, green slats on charcoal, cursor/tap fluid response and independent background pause/play |
 | Name polish | .name-track | Original CSS animation remains; Web Animations playback-rate updates ease resume and desktop scrolling from base speed to at most 1.35× |
 | Scroll reveals | Highlights, work heading and introductions, experience, about, skills, contact, study impact and next project | IntersectionObserver once, 18px rise, 650ms duration, 90ms sibling stagger; default content is visible |
 | Myntra comparison | Homepage .project-body, case-study .interface-demo | Three generic quotation tiles settle into shared fields; native button toggles/replays and desktop tile hover previews the organization |
@@ -32,7 +33,7 @@ motion.css owns motion timing tokens. motion.js keeps each feature scoped, regis
 
 ## Accessibility and failure behavior
 
-- Reduced motion disables pointer effects and the continuous name, completes active finite effects, and makes diagram state changes instant. The portrait and essential text are never animated out of view.
+- Reduced motion disables pointer effects and the continuous name, completes active finite effects, and makes diagram state changes instant. The slat field renders once without continuous animation. Essential text is never animated out of view.
 - Controls use real buttons, visible focus, state attributes and native activation. New controls hidden in source are shown only after their handlers are registered. The architecture's source buttons are disabled until they become functional.
 - Hover is optional. Quote organization, fund comparisons, Oracle diagrams and workflow replays work with keyboard or touch. Conceptual labels remain visible.
 - Without GSAP, diagram controls and reading progress still work instantly; reveals and pointer effects are skipped. Without any JavaScript, the original static name, original diagrams, routes, contacts and native details remain accessible; both Oracle workflows are visible.
@@ -44,3 +45,13 @@ motion.css owns motion timing tokens. motion.js keeps each feature scoped, regis
 Local checks cover preserved professional copy/links/IDs, all four routes at 320px, 390px, 834px and 1440px, pointer limits and reset, stable portrait framing, marquee pause/resume, touch controls, keyboard states, workflow replay, reading progress, active sections, direct refresh/history, reduced motion, blocked GSAP, no JavaScript and resume printing. Axe WCAG A/AA checks and unthrottled Chrome lab performance observations are recorded locally in .hallmark/motion-v3/. These are lab observations, not field Core Web Vitals or a cross-browser certification.
 
 The pre-upgrade public version is on codex/backup-before-motion-v3-2026-11-18 at commit 67156fa72ebb2152153e8166f9369974e1356324. No force-push is needed to restore it.
+
+## Micro Slats replacement
+
+The current homepage loads slats.css, assets/vendor/ogl-1.0.11.min.js and micro-slats.js after the existing motion layer. These are static browser assets; no React, installation, server-side rendering or build step is required. The local preparation bundle keeps only the six OGL exports used by the effect. The website makes no third-party library requests.
+
+Colors are --slats-background, --slats-color and --slats-glint in slats.css. The overlay veil protects white navigation, action and name text. Dimensions, speed and interaction intensity are in the settings object in micro-slats.js. CSS provides the static slat fallback. The background control is only revealed after the renderer initializes, and is hidden if WebGL becomes unavailable. Context restoration remounts the renderer. Listeners, frame requests, observers and GPU resources are released on a non-persisted page exit.
+
+The React Bits shader and fluid logic are adapted under its MIT + Commons Clause license, with the full license retained at assets/vendor/REACT-BITS-LICENSE.md. This port is embedded as part of this portfolio, not distributed as a component product. OGL is Unlicense/public-domain software; its terms are included in assets/vendor/OGL-LICENSE.txt. Source revision and dependency details are in assets/vendor/NOTICE.md.
+
+The previous portrait version is preserved on codex/backup-before-micro-slats-2026-11-18 at commit 132552565aab8d41adf02f9c595200723d788f66. Original photo files remain in the repository but are no longer requested by the homepage.

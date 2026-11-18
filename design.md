@@ -7,8 +7,8 @@ The shared system for the homepage, case studies and resume.
 - Shape: name-led opening followed by an open index of selected work.
 - Theme: the portfolio's existing brand, with composition informed by the supplied Dennis Snellenberg reference.
 - Tone: confident, direct, spacious, personal.
-- Hero: portrait-led Poster on the homepage; compact Banner on reading pages.
-- Signature: the owner's supplied portrait centered on a grey field, with white nameplate typography across the lower hero and an MBA education badge alongside.
+- Hero: interactive slat field on the homepage; compact Banner on reading pages.
+- Signature: green Micro Slats waves on charcoal, with the scrolling white name above the background and an MBA education badge alongside. The portrait is removed from the hero.
 
 ## Tokens
 tokens.css owns every color, typeface and scale.
@@ -29,12 +29,14 @@ tokens.css owns every color, typeface and scale.
 ## Motion
 The homepage name moves continuously right to left using the original transform-only CSS loop. Its pause control, hover/focus pause, offscreen pause and reduced-motion static fallback remain authoritative. Optional GSAP playback-rate easing adds a soft resume and a small desktop scroll-speed response without resetting loop position. With JavaScript disabled the name is static and navigation works.
 
-Portfolio v3 layers interaction over this system in motion.css and motion.js. Buttons respond in 150–250ms, magnets return in 440ms, reveals use 650ms with a 90ms stagger, project interactions use 450–750ms, and workflow highlighting completes within approximately one second. The face and portrait never move; desktop pointer depth affects only a faint background highlight and the MBA badge. Magnets and depth are disabled for touch and reduced motion. No custom cursor, scroll interception, preloader, particles or experimental name dragging.
+Portfolio v3 layers interaction over this system in motion.css and motion.js. Buttons respond in 150–250ms, magnets return in 440ms, reveals use 650ms with a 90ms stagger, project interactions use 450–750ms, and workflow highlighting completes within approximately one second. Desktop pointer depth affects the MBA badge; the former portrait and background highlight are removed. Magnets and badge depth are disabled for touch and reduced motion. No custom cursor, scroll interception, preloader, particles or experimental name dragging.
+
+The Micro Slats replacement is adapted from the owner's chosen React Bits reference into plain JavaScript, with locally hosted OGL 1.0.11. slats.css owns the green/charcoal background tokens and text-protection veil. micro-slats.js owns waves, pointer/tap ripples, separate pause/play, visibility scheduling and WebGL cleanup. Rendering is capped at 1.8 million pixels and 1.5 device-pixel ratio, with 45fps desktop and 30fps coarse-pointer limits. Reduced motion renders a still field; missing JavaScript or WebGL retains a CSS slat pattern. The existing name controls remain independent.
 
 Content stays visible by default. Reveal animations start only at intersection and run once. Every project interaction has a native button, and all original diagrams and claims remain. Reduced motion makes state changes instant. CSS-only navigation, link, press and native disclosure feedback also apply to the resume, which does not load GSAP. Longer case studies have a decorative reading-progress line and active native anchor links. See MOTION.md for selectors, fallbacks and maintenance.
 
 ## Material
-The owner's supplied transparent portrait is used unchanged, framed through CSS to remove empty transparent margins from the visible composition. Existing factual diagrams and logos are retained.
+No portrait is displayed or preloaded on the current homepage. Earlier supplied images remain archived in the repository and backup branch. Existing factual diagrams and logos are retained.
 Company colors identify experience, not affiliation or endorsement.
 
 ## Exports
