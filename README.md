@@ -67,3 +67,11 @@ Shared presentation lives in style.css, tokens.css and base.css. The DM Sans fon
 The previous public site is preserved on branch codex/backup-before-hallmark-2026-11-17, at commit 4e77d591859f0b8e5b7d8f0c53a3b66188879b29. To restore it, create a new commit on main that restores the files from that branch. Avoid force-pushing; keep later work reviewable.
 
 Hallmark validation records are stored locally in .hallmark/. .hallmark/copy-changes.md lists headline and punctuation adjustments. The local QA packages, source generators and screenshots are excluded from the deployed repository. No development packages are required by the public site.
+
+## Portrait-led update
+
+The owner's supplied photo now leads the homepage. assets/jay-chaudhary.png is the original, unchanged 3000 × 4000 transparent PNG. CSS frames its lower portion to avoid the large transparent margin above the subject; no facial features, clothes or background pixels are synthesized or edited.
+
+The hero uses a grey field, a centered portrait, large white name text, an MBA badge and a circular work link, following the supplied reference's composition. A lower scrim improves white-text readability. Mobile has its own crop and compact work control; the resume remains available in navigation. Existing company branding, project pages, disclosures, verified contacts and print behavior remain intact.
+
+The previous name-led design is backed up on codex/backup-before-portrait-2026-11-18 at commit eb8f8ef556f1f2ae5f59a320a55b6335d42c536a. This is in addition to the earlier pre-Hallmark backup.

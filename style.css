@@ -1,4 +1,4 @@
-/* Hallmark · shape: Marquee Hero · genre: editorial · theme: brand · redesign: full · hero: Ledge (/), Banner (projects), Banner (resume) · nav: wordmark and text links · footer: dark contact close · signature: Jay Chaudhary at nameplate scale · posture: Restrained · imagery: existing logos and factual diagrams · v2.0.0 */
+/* Hallmark · shape: Portrait Poster · genre: editorial · theme: brand · redesign: full · hero: Poster (/), Banner (projects), Banner (resume) · nav: wordmark and text links · footer: dark contact close · signature: owner's portrait with a white nameplate and MBA badge · posture: Restrained · imagery: supplied portrait, existing logos and factual diagrams · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H5 E4 S4 R5 V4 · weakest: S, removed generic panels and led with Jay's identity and specific work */
 /* Hallmark · hero-review: fix, 2 scale findings resolved; official logo backplates retained because the supplied source images contain their own white ground */
 /* Hallmark · waive 77 · resume.html is a dense professional document with real dated rows · the resume's education and certification facts belong in readable record sections rather than invented visual showcases */
@@ -72,3 +72,50 @@ footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:w
 .about-copy .lead{max-width:45ch}
 .experience-row.brand-myntra,.experience-row.brand-oracle{border-top-color:var(--color-accent)}
 .section-deck{font-size:var(--text-lead);margin-bottom:var(--space-xl)}
+/* Portrait-led composition requested by the owner, 18 November 2026. */
+.portrait-page .site-header{position:absolute;inset:0 0 auto;background:transparent;color:var(--portrait-ink)}
+.portrait-page .site-header a:focus-visible{outline-color:var(--portrait-focus)}
+.portrait-hero{display:block;min-height:100svh;height:100svh;padding:0;background:var(--portrait-field);color:var(--portrait-ink);position:relative;isolation:isolate;overflow:clip}
+.portrait-hero:before{display:none}
+.portrait-window{position:absolute;inset:0 auto 0 50%;width:min(76%,1120px);transform:translateX(-50%);overflow:clip;z-index:var(--z-base)}
+.portrait-window img{position:absolute;left:50%;top:4%;width:260%;max-width:none;height:auto;transform:translate(-50%,-49%)}
+.portrait-hero:after{content:"";position:absolute;inset:55% 0 0;background:linear-gradient(var(--portrait-clear),var(--portrait-scrim));pointer-events:none;z-index:var(--z-raised)}
+.portrait-content{position:relative;height:100%;z-index:var(--z-dropdown)}
+.portrait-hero h1{position:absolute;bottom:var(--space-xl);left:var(--gutter);right:var(--gutter);max-width:none;font-size:clamp(4.5rem,12vw,10.75rem);white-space:nowrap;line-height:1.05;letter-spacing:-.045em;color:var(--portrait-ink);font-weight:400}
+.education-badge{position:absolute;left:0;top:43%;display:flex;align-items:center;gap:var(--space-lg);padding:var(--space-lg) var(--space-lg) var(--space-lg) var(--gutter);border-radius:0 var(--radius-pill) var(--radius-pill) 0;background:var(--portrait-badge);color:var(--portrait-ink);font-size:var(--text-md);line-height:1.4}
+.education-badge:hover{background:var(--color-dark);text-decoration:none}
+.degree-seal{display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:var(--radius-pill);background:var(--portrait-seal);font-size:var(--text-sm)}
+.portrait-role{position:absolute;top:34%;right:var(--gutter);width:230px;display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-lg)}
+.portrait-role>p{font-size:clamp(1.75rem,2.8vw,2.5rem);line-height:1.25}
+.portrait-work{display:flex;align-items:center;justify-content:center;width:112px;height:112px;border:1px solid var(--portrait-ink);border-radius:var(--radius-pill);font-size:var(--text-sm);white-space:nowrap}
+.portrait-work:hover{background:var(--portrait-badge);text-decoration:none}
+.portrait-resume{font-size:var(--text-sm);min-height:44px;display:flex;align-items:center;text-decoration:underline}
+.portrait-content a:focus-visible{outline-color:var(--portrait-focus);outline-offset:4px}
+.portrait-intro{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:var(--gap-columns);align-items:center;padding-block:var(--space-3xl)}
+.portrait-intro>p{font-size:var(--text-title);max-width:29ch;line-height:1.35}
+.portrait-intro .hero-tail{align-items:flex-start;flex-direction:column;justify-self:end;gap:var(--space-lg)}
+@media(min-width:1440px){.portrait-hero{height:100svh;min-height:100svh}}
+@media(min-width:1600px){.portrait-window{width:1024px}.portrait-hero h1{font-size:11rem}}
+@media(max-width:960px){
+ .portrait-window{width:100%}.portrait-window img{width:255%;top:10%}
+ .portrait-role{top:24%;width:190px;gap:var(--space-md)}
+ .education-badge{top:45%;font-size:var(--text-sm);gap:var(--space-md);padding:var(--space-md) var(--space-md) var(--space-md) var(--gutter)}
+ .degree-seal{width:48px;height:48px}
+ .portrait-hero h1{font-size:11.7vw;bottom:var(--space-2xl)}
+ .portrait-intro{grid-template-columns:minmax(0,1fr);padding-block:var(--space-2xl)}
+ .portrait-intro .hero-tail{justify-self:start;gap:var(--space-lg)}
+}
+@media(max-width:600px){
+ .portrait-page .header-inner{padding-top:var(--space-lg)}
+ .portrait-hero{min-height:100svh;height:100svh;max-height:1000px}
+ .portrait-window{width:100%;left:50%;top:25%}.portrait-window img{width:350%;top:6%;transform:translate(-50%,-49%)}
+ .portrait-role{top:20%;right:var(--gutter);width:140px;gap:var(--space-sm)}
+ .portrait-role>p{font-size:var(--text-lg)}
+ .portrait-work{width:112px;height:44px;font-size:var(--text-sm)}
+ .portrait-resume{display:none}
+ .education-badge{top:auto;bottom:27%;padding:var(--space-md);gap:var(--space-sm);font-size:var(--text-sm)}
+ .degree-seal{width:40px;height:40px;font-size:var(--text-xs)}
+ .portrait-hero h1{font-size:13.4vw;bottom:var(--space-lg);line-height:1.1}
+ .portrait-intro .hero-employers{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){.portrait-content a{transition:none}}

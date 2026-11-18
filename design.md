@@ -7,8 +7,8 @@ The shared system for the homepage, case studies and resume.
 - Shape: name-led opening followed by an open index of selected work.
 - Theme: the portfolio's existing brand, with composition informed by the supplied Dennis Snellenberg reference.
 - Tone: confident, direct, spacious, personal.
-- Hero: Ledge on the homepage; compact Banner on reading pages.
-- Signature: Jay's name at display scale, with MBA identity alongside.
+- Hero: portrait-led Poster on the homepage; compact Banner on reading pages.
+- Signature: the owner's supplied portrait centered on a grey field, with white nameplate typography across the lower hero and an MBA education badge alongside.
 
 ## Tokens
 tokens.css owns every color, typeface and scale.
@@ -31,7 +31,7 @@ Still at rest. Transform-only press feedback. Reduced motion removes it.
 No moving name, custom cursor, parallax, preloader or auto-playing loop.
 
 ## Material
-Existing factual diagrams and logos are retained. No stand-in portrait.
+The owner's supplied transparent portrait is used unchanged, framed through CSS to remove empty transparent margins from the visible composition. Existing factual diagrams and logos are retained.
 Company colors identify experience, not affiliation or endorsement.
 
 ## Exports
