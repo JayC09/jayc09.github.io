@@ -35,6 +35,7 @@ if (portraitHero) {
     toggle.textContent = motion.held ? 'Play name' : 'Pause name';
     toggle.setAttribute('aria-label', motion.held ? 'Play scrolling name' : 'Pause scrolling name');
     toggle.setAttribute('aria-pressed', String(motion.held));
+    portraitHero.dispatchEvent(new CustomEvent('portfolio:marquee-motion', { detail: { running, reduced } }));
   };
   toggle.addEventListener('click', () => { motion.held = !motion.held; syncNameMotion(); });
   marquee.addEventListener('pointerenter', () => { motion.hover = true; syncNameMotion(); });

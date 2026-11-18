@@ -79,3 +79,13 @@ To change the portrait, replace the image reference and preload in index.html, u
 The version before the smaller portrait and scrolling name is preserved on codex/backup-before-marquee-2026-11-18 at commit a73fad141b64a6988943a24290995199b5b76176.
 
 The previous name-led design is backed up on codex/backup-before-portrait-2026-11-18 at commit eb8f8ef556f1f2ae5f59a320a55b6335d42c536a. This is in addition to the earlier pre-Hallmark backup.
+
+## Portfolio v3 motion upgrade
+
+The site still runs as static HTML, CSS and JavaScript. motion.css and motion.js add optional interaction without a build step. index.html and both project pages load the locally hosted, pinned GSAP 3.15.1 core; resume.html uses CSS feedback and the original print script without loading the animation library. The original license header is intact; see assets/vendor/NOTICE.md for source and license links. No CDN requests, ScrollTrigger, Draggable or third-party effect snippets are required.
+
+MOTION.md maps each effect to its selectors and describes accessibility, fallbacks and editing. Keep the current deferred script order on the homepage and project pages: script.js, pinned GSAP, then motion.js. Change shared version query strings on all four pages when changing shared CSS or JavaScript.
+
+The existing portrait asset, professional claims, diagram captions, contacts, section IDs and routes are preserved. New quote and fund demonstrations are expressly conceptual and use no real vendor, quote, fund-return or client data. Oracle comparisons retain approximate baseline and strict under-30-minute labels without interpolated numeric claims. All original workflows remain readable with JavaScript disabled.
+
+The previous public version is preserved on codex/backup-before-motion-v3-2026-11-18 at commit 67156fa72ebb2152153e8166f9369974e1356324. Restore it with a new commit rather than rewriting main history.

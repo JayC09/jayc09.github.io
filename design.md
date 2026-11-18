@@ -27,7 +27,11 @@ tokens.css owns every color, typeface and scale.
 - Resume print handler and every existing route and contact destination stay intact.
 
 ## Motion
-The homepage name moves continuously right to left using a transform-only loop, as requested by the owner. A visible pause control, hover/focus pause, offscreen pause and reduced-motion static fallback keep it accessible. With JavaScript disabled the name is static and all navigation works. Other feedback is transform-only. No custom cursor, parallax or preloader.
+The homepage name moves continuously right to left using the original transform-only CSS loop. Its pause control, hover/focus pause, offscreen pause and reduced-motion static fallback remain authoritative. Optional GSAP playback-rate easing adds a soft resume and a small desktop scroll-speed response without resetting loop position. With JavaScript disabled the name is static and navigation works.
+
+Portfolio v3 layers interaction over this system in motion.css and motion.js. Buttons respond in 150–250ms, magnets return in 440ms, reveals use 650ms with a 90ms stagger, project interactions use 450–750ms, and workflow highlighting completes within approximately one second. The face and portrait never move; desktop pointer depth affects only a faint background highlight and the MBA badge. Magnets and depth are disabled for touch and reduced motion. No custom cursor, scroll interception, preloader, particles or experimental name dragging.
+
+Content stays visible by default. Reveal animations start only at intersection and run once. Every project interaction has a native button, and all original diagrams and claims remain. Reduced motion makes state changes instant. CSS-only navigation, link, press and native disclosure feedback also apply to the resume, which does not load GSAP. Longer case studies have a decorative reading-progress line and active native anchor links. See MOTION.md for selectors, fallbacks and maintenance.
 
 ## Material
 The owner's supplied transparent portrait is used unchanged, framed through CSS to remove empty transparent margins from the visible composition. Existing factual diagrams and logos are retained.
