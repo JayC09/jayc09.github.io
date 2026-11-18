@@ -1,5 +1,5 @@
 /* Compact experience overview; retains the existing type, palette and mobile flow. */
-:root{--compact-section-gap:48px;--consolidation-cycle:7s;--hero-orange:#f97316;--hero-orange-ink:#17211b;--hero-orange-base:#111a16;--hero-sun-duration:620ms}
+:root{--compact-section-gap:48px;--consolidation-cycle:7s;--hero-orange:#D5F478;--hero-orange-ink:#17211b;--hero-orange-base:#111a16;--hero-sun-duration:620ms}
 .compact-home .portrait-intro{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-lg);padding-block:var(--space-xl)}
 .compact-home .portrait-intro>p{font-size:var(--text-title);max-width:52ch}
 .compact-home .portrait-intro .hero-tail{align-items:center;justify-self:auto;gap:var(--space-sm)}

@@ -24,14 +24,14 @@ tokens.css owns every color, typeface and scale.
 ## Controls
 - One primary recipe: ink fill, paired paper text, pill outline.
 - Secondary: transparent surface, ink border.
-- Hero actions: orange #f97316 outline and lettering on dark ink. A bottom-origin radial fill reveals dark lettering with the orange surface, maintaining contrast throughout. Keyboard focus receives the same fill. The MBA badge and two circular actions use a stronger nearest-target desktop magnet, capped at 38px with extra approach range and collision spacing.
+- Hero actions: lime #D5F478 outline and lettering on dark ink. A bottom-origin radial fill reveals dark lettering with the lime surface, maintaining contrast throughout. Keyboard focus receives the same fill. The MBA badge and two circular actions use a stronger nearest-target desktop magnet, capped at 38px with extra approach range and collision spacing.
 - Text actions are underlined. Every interactive element has immediate visible focus.
 - Resume print handler and every existing route and contact destination stay intact.
 
 ## Motion
 The homepage name moves continuously right to left using the original transform-only CSS loop. Hover/focus pause, offscreen pause and reduced-motion static fallback remain. Optional GSAP playback-rate easing adds a soft resume and a small desktop scroll-speed response without resetting loop position. With JavaScript disabled the name is static and navigation works. Visible animation controls are removed at the owner's request; Escape toggles motion globally, with screen-reader instructions and status.
 
-Portfolio v3 layers interaction over this system in motion.css and motion.js. Hero magnets settle in 360ms with a 440ms label response and the radial orange fill takes 620ms. Reveals use 650ms with a 90ms stagger; workflow highlighting completes within approximately one second. The MBA badge and circular actions attract the pointer from a larger capture zone; the former portrait and ambient badge drift are removed. Magnets are disabled for touch, reduced motion and focused actions. No custom cursor, scroll interception, preloader, particles or experimental name dragging.
+Portfolio v3 layers interaction over this system in motion.css and motion.js. Hero magnets settle in 360ms with a 440ms label response and the radial lime fill takes 620ms. Reveals use 650ms with a 90ms stagger; workflow highlighting completes within approximately one second. The MBA badge and circular actions attract the pointer from a larger capture zone; the former portrait and ambient badge drift are removed. Magnets are disabled for touch, reduced motion and focused actions. No custom cursor, scroll interception, preloader, particles or experimental name dragging.
 
 The Micro Slats replacement is adapted from the owner's chosen React Bits reference into plain JavaScript, with locally hosted OGL 1.0.11. slats.css owns the green/charcoal background tokens and text-protection veil. micro-slats.js owns automatic waves, pointer/tap ripples, keyboard pause, visibility scheduling and WebGL cleanup. Rendering is capped at 1.8 million pixels and 1.5 device-pixel ratio, with 45fps desktop and 30fps coarse-pointer limits. Reduced motion renders a still field; missing JavaScript or WebGL retains a CSS slat pattern.
 

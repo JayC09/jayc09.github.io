@@ -116,6 +116,6 @@ The work-experience headers and case-study mastheads now use the owner's supplie
 
 The conceptual sourcing animation no longer includes a persistent connector line. Quote tiles still enter the shared dashboard automatically, and the consolidated phase leaves no line outside the dashboard.
 
-## Orange hero actions
+## Lime hero actions
 
-The hero's MBA badge, View work and View resume actions use #f97316 with a radial sunrise fill on hover and keyboard focus. A matched dark label is revealed with the fill for contrast; the duplicate visual label is aria-hidden. The three actions use stronger nearest-target desktop magnetism with a 38px cap and extra approach range, while the circles retain a minimum gap. Focus, touch and reduced motion disable magnetic tracking. Edit the orange tokens and .hero-sun-action rules in refinements.css; the pointer behavior is in motion.js. Displayed education labels use MBA throughout the site, with the existing resume dates preserved.
+The hero's MBA badge, View work and View resume actions use #D5F478 with a radial sunrise fill on hover and keyboard focus. A matched dark label is revealed with the fill for contrast; the duplicate visual label is aria-hidden. The three actions use stronger nearest-target desktop magnetism with a 38px cap and extra approach range, while the circles retain a minimum gap. Focus, touch and reduced motion disable magnetic tracking. Edit the hero accent tokens and .hero-sun-action rules in refinements.css; the pointer behavior is in motion.js. Displayed education labels use MBA throughout the site, with the existing resume dates preserved.

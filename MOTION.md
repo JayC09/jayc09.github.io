@@ -27,7 +27,7 @@ Oracle's time comparisons are static. Its original Before and After workflow fig
 
 Escape toggles motion globally through portfolio:motion-pause. script.js supplies screen-reader instructions and status, pauses the name and adds .motion-paused for CSS loops. micro-slats.js listens to the same event and stops frame scheduling. No extra visible button is required. Finite entrances settle to readable end states when motion is paused. Reduced-motion preferences disable continuous motion and show the static sourcing illustration. All content is visible without JavaScript; the slat field has a CSS fallback if WebGL is unavailable.
 
-The hero uses --hero-orange (#f97316) on --hero-orange-base. Hover and visible focus reveal an orange circle growing from the bottom edge in 620ms. The fill includes an aria-hidden copy of the label in dark ink, so dark text appears only over the orange portion while the original orange label remains over the dark portion. Both label layers share the same magnetic movement. The same treatment applies to the MBA badge, including its decorative seal. Reduced motion makes the fill immediate; touch does not use magnetic tracking.
+The hero uses --hero-orange (#D5F478) on --hero-orange-base. Hover and visible focus reveal a lime circle growing from the bottom edge in 620ms. The fill includes an aria-hidden copy of the label in dark ink, so dark text appears only over the lime portion while the original lime label remains over the dark portion. Both label layers share the same magnetic movement. The same treatment applies to the MBA badge, including its decorative seal. Reduced motion makes the fill immediate; touch does not use magnetic tracking.
 
 ## Editing
 
@@ -37,7 +37,7 @@ The hero uses --hero-orange (#f97316) on --hero-orange-base. Hover and visible f
 - Oracle chart: .migration-comparison on the homepage and the original .time-chart in projects/oracle.html. Keep the <30 min bound and original explanatory captions.
 - Name and keyboard motion state: script.js. Keep hover/focus/offscreen and reduced-motion support.
 - Pointer responses, observers and reading progress: motion.js. Features are scoped and listeners/observers are cleaned up on non-persisted exits.
-- Orange palette and sunrise fill: --hero-orange tokens and .hero-sun-action/.hero-sun-fill in refinements.css. Keep the fill's label aria-hidden and the original label accessible. MBA labels on the homepage and resume use simply MBA; education dates remain in the resume.
+- Lime palette and sunrise fill: --hero-orange tokens and .hero-sun-action/.hero-sun-fill in refinements.css. Keep the fill's label aria-hidden and the original label accessible. MBA labels on the homepage and resume use simply MBA; education dates remain in the resume.
 - Background palette: slats.css. Wave settings and GPU budgets: micro-slats.js. Keep the contrast veil, 1.8-million-pixel budget and visibility checks.
 - Change shared file query versions in all applicable HTML pages when updating shared assets.
 
