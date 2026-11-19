@@ -27,7 +27,9 @@ Keep professional claims grounded in owner-supplied facts. Resume experience and
 
 Update the web resume in `resume.html`. To replace the downloadable resume, upload the new approved PDF at the same asset path. Keep the native `download` attribute and the “Download resume” label. The website does not modify or regenerate the PDF.
 
-The About disclosure includes coffee, badminton, gym time, technology and gaming interests. The education records show MBA/IIM Raipur and B.Tech/NMIMS without a redundant Education sublabel beneath MBA.
+About uses two vertical panels: Background and Interests. Each contains five compact cards. Background covers MBA/IIM Raipur, B.Tech/NMIMS, Myntra, Oracle and CSPO; Interests covers coffee, badminton, gym, tech and gaming. Both panels stay visible side by side on phones and desktop. The old combined disclosure and separate credentials block are replaced, keeping the measured section footprint. Edit content in index.html and sizing in about.css; preserve the layout minimums when changing copy.
+
+The hero badge shows MBA/IIM Raipur once. Its decorative circle uses a graduation-cap SVG, with an aria-hidden copy in the radial fill for consistent contrast.
 
 All pill actions share the main Email button's dark/lime styling, radial sunrise fill and gentler 22px desktop magnetic cap. Use `.pill-action.hero-sun-action` inside `.pill-magnetic-zone`, with one accessible label and an aria-hidden duplicate in `.hero-sun-fill`. Contact pills are equal-width and form a 2×2 grid on phones. Hero circles retain their stronger 38px response.
 

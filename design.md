@@ -18,7 +18,7 @@ tokens.css owns every color, typeface and scale.
 - Type: locally hosted DM Sans, 400 and 600. Headers stay one color and one weight.
 - Company identities: use the supplied symbol and brand-text images once per header. The wordmark image supplies the heading's accessible name; do not add a second visible typed company name. CSS frames the original transparent margins without altering the files.
 - Canvas: full-width homepage with responsive edge gutters. Employer cards share one desktop viewport and stack on mobile. Reading pages retain the capped 1440px container and 65ch prose measure. Compact overview gap is 24px; reading columns retain their 32px gap.
-- Surfaces: whitespace and rules first. No nested cards.
+- Surfaces: whitespace and rules first. The owner explicitly requested nested cards for About: two vertical Background/Interests panels with five compact records each, aligned to the prior section height. Other sections retain the existing surfaces.
 - Prose: 65ch at 16px or larger, with long reading content retained.
 
 ## Controls
