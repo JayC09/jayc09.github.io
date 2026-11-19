@@ -74,23 +74,79 @@
   }
 
   function reveals() {
-    if (!gs) return;
-    const groups = [];
-    for (const selector of ['.skills', '.study-impact']) {
-      const root = document.querySelector(selector); if (root) groups.push([root, [...root.children]]);
-    }
-    all('.project,#about .about-grid,.contact-section,.study-next').forEach(root => {
-      const targets = root.classList.contains('project') ? all('.project-heading,.project-body', root) : [root];
-      groups.push([root, targets]);
+    if (!gs || !('IntersectionObserver' in window)) return;
+    const selector = [
+      '.site-header .wordmark', '.site-header nav', 'main .back-link',
+      'main h1', 'main h2', 'main h3', 'main p', 'main ul', 'main figure', 'main details',
+      '.education-badge', '.portrait-actions', '.section-heading', '.work-card-header', '.work-metric',
+      '.case-study-link', '.project-meta', '.tags', '.brand-lockup', '.study-impact>*', '.study-cards>article',
+      '.flow', '.table-wrap', '.credentials>div', '.skills>div', '.contact-actions', '.study-next>.pill-magnetic-zone',
+      '.cv-heading', '.cv-role', '.cv-sidebar>section', '.footer-inner>*', '.cv-footer>*'
+    ].join(',');
+    const candidates = all(selector).filter(node => !node.closest('[aria-hidden="true"],.study-toc,figcaption'));
+    // Animate each independent content block once per entrance, without nesting fades.
+    const targets = candidates.filter(node => !candidates.some(parent => parent !== node && parent.contains(node)));
+    const states = targets.map((node, index) => {
+      node.setAttribute('data-motion-reveal', '');
+      node.setAttribute('data-scroll-reveal', '');
+      return { node, index, inside: false, side: 1, animation: null };
     });
-    groups.forEach(([root, targets]) => {
-      targets.forEach(target => target.setAttribute('data-motion-reveal', ''));
-      onceVisible(root, () => {
-        if (preference.matches || window.portfolioMotionPaused) return;
-        set(targets, { opacity: 0, y: 18 });
-        to(targets, { opacity: 1, y: 0, duration: .65, stagger: .09, ease: 'power3.out', overwrite: true });
+    const lookup = new Map(states.map(state => [state.node, state]));
+    const allowed = () => !preference.matches && !window.portfolioMotionPaused && !matchMedia('print').matches;
+    const shift = state => state.node.closest('.resume-page,footer,.site-header') ? 0 : state.side * 20;
+    const show = state => {
+      stop(state.animation);
+      set(state.node, { '--reveal-opacity': 1, '--reveal-y': '0px' });
+    };
+    const conceal = state => {
+      stop(state.animation);
+      set(state.node, { '--reveal-opacity': 0, '--reveal-y': shift(state) + 'px' });
+    };
+    const observer = new IntersectionObserver(entries => {
+      let stagger = 0;
+      for (const entry of entries) {
+        const state = lookup.get(entry.target);
+        if (!state) continue;
+        state.inside = entry.isIntersecting;
+        if (!allowed() || state.node.contains(document.activeElement)) { show(state); continue; }
+        if (entry.isIntersecting) {
+          stop(state.animation);
+          state.node.dataset.revealFrom = state.side > 0 ? 'below' : 'above';
+          set(state.node, { '--reveal-opacity': 0, '--reveal-y': shift(state) + 'px' });
+          state.animation = to(state.node, {
+            '--reveal-opacity': 1, '--reveal-y': '0px',
+            duration: .6, delay: Math.min(stagger++ * .035, .105), ease: 'power2.out', overwrite: true
+          });
+        } else {
+          state.side = entry.boundingClientRect.top >= innerHeight ? 1 : -1;
+          conceal(state);
+        }
+      }
+    }, { rootMargin: '48px 0px', threshold: 0 });
+    states.forEach(state => {
+      const rect = state.node.getBoundingClientRect();
+      state.side = rect.bottom < 0 ? -1 : 1;
+      if (allowed()) conceal(state);
+      observer.observe(state.node);
+    });
+    observers.push(observer);
+    const refresh = () => {
+      states.forEach(state => {
+        const rect = state.node.getBoundingClientRect();
+        state.inside = rect.bottom > -48 && rect.top < innerHeight + 48;
+        state.side = rect.bottom <= -48 ? -1 : 1;
+        if (!allowed() || state.inside || state.node.contains(document.activeElement)) show(state);
+        else conceal(state);
       });
+    };
+    on(document, 'focusin', event => {
+      for (const state of states) if (state.node.contains(event.target)) show(state);
     });
+    on(preference, 'change', refresh);
+    on(window, 'portfolio:motion-pause', refresh);
+    on(window, 'beforeprint', () => states.forEach(show));
+    on(window, 'afterprint', refresh);
+    on(window, 'pageshow', event => { if (event.persisted) refresh(); });
   }
 
   function pointerDepth() {

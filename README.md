@@ -14,6 +14,7 @@ Repository: https://github.com/JayC09/jayc09.github.io
 - `resume.css`: dense two-column resume layout and mobile reflow.
 - `style.css`, `tokens.css`, `base.css`, `refinements.css`: shared styling, typography, employer branding and compact page spacing.
 - `script.js`, `motion.css`, `motion.js`: optional motion, keyboard pause, automatic sourcing visual, reading progress and magnetic buttons.
+- `scroll.js`: Lenis 1.3.27 setup, smooth wheel/keyboard/anchor scrolling and native fallbacks. Its browser bundle and recommended CSS are pinned under `assets/vendor/`.
 - `slats.css`, `micro-slats.js`: interactive hero background, adapted from the owner's React Bits reference.
 - `assets/vendor/`: pinned local GSAP 3.15.1 and OGL 1.0.11 browser bundles and license notices. Fonts and logos are also hosted locally.
 - `design.md`, `MOTION.md`: current design and interaction notes.
@@ -32,14 +33,21 @@ All pill actions share the main Email button's dark/lime styling, radial sunrise
 
 Edit appearance in `refinements.css` and magnetic settings in `motion.js`. Magnets are disabled on touch, for reduced motion, and while a group action has keyboard focus. Escape pauses motion. Update shared-file version queries in all four HTML pages when changing CSS/JavaScript.
 
+Scrolling uses locally hosted Lenis with a .12 wheel lerp. Native touch momentum is retained; Page Up/Down, arrows, Space and Home/End ease when they are not being used by controls or nested scrollers. Same-page anchors preserve their URL and move focus on arrival. Browser history and the PDF download remain native.
+
+Content blocks reveal again whenever they re-enter from above or below: a 600ms fade with a 20px directional shift and a small batch stagger. Blocks reset only outside a 48px viewport buffer, so small direction changes do not restart visible content. Navigation, resume and footer blocks fade without shifting, preserving their geometry. Reveals use independent CSS translate variables so magnetic transforms, the name loop and sourcing diagrams can keep running. No build or ScrollTrigger dependency is added.
+
+Reduced motion, Escape and printing restore immediately visible content and native scrolling. Missing JavaScript/Lenis/GSAP preserves usable content and navigation. Change the smooth-scroll settings in `scroll.js` and reveal targets/timing in `motion.js`; `motion.css` contains the CSS glue and print/reduced-motion fallbacks.
+
 ## Preview and verification
 
 Open `index.html` directly, or serve the folder with any static HTTP server. There is no build command. Check:
 
 1. Desktop and mobile navigation, anchor targets, native disclosures, contact links and resume download.
 2. Desktop resume fit, readable mobile reflow, keyboard focus and reduced motion.
-3. Company identities, reported outcomes, assets and factual wording.
-4. That the downloadable PDF matches the approved original, including a real browser download.
+3. Repeated reveal entries and wheel reversals in both directions, anchor/history alignment, native touch and horizontal table scrolling.
+4. Company identities, reported outcomes, assets and factual wording.
+5. That the downloadable PDF matches the approved original, including a real browser download.
 
 ## Deployment and backups
 
@@ -50,3 +58,5 @@ Earlier versions remain in Git history and backup branches, including `codex/bac
 ## Licenses
 
 Micro Slats derives from React Bits, revision `d01aa914dcbe76da8b2923ebf872b5c8b1066e4c`; its MIT + Commons Clause notice is in `assets/vendor/REACT-BITS-LICENSE.md`. OGL uses the Unlicense. GSAP's original header and license link remain. See `assets/vendor/NOTICE.md`.
+
+Lenis 1.3.27 is MIT licensed by darkroom.engineering. Its full license is retained in `assets/vendor/LENIS-LICENSE.txt`; its distribution files are unchanged.

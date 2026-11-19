@@ -18,7 +18,7 @@ The current site keeps the slat hero, white scrolling name, company branding and
 | .name-track | Existing right-to-left loop, hover/focus pause, offscreen pause and soft playback-rate easing |
 | .quote-consolidation | Seven-second CSS loop: generic WhatsApp, email and Excel quote tiles enter one shared dashboard; caption is always readable |
 | Myntra .flow | One-time sequential highlighting when the diagram enters view, without replay controls |
-| Skills and other introductory blocks | One-time 18px/650ms entrance with a 90ms sibling stagger; employer records stay immediately visible |
+| Content blocks on all four pages | Repeated 600ms fade and 20px directional shift on re-entry from either edge; a 48px buffer prevents flicker. Resume/footer use opacity only |
 | Hero circular actions | Nearest-target desktop attraction from half the target size plus 144px, a 38px displacement cap, delayed labels and collision spacing; focused targets stay still |
 | All pill actions and rounded MBA badge | Same radial lime fill and nearest-target controller, with a gentler 22px displacement cap, 96px approach range and 6px minimum spacing; static on touch and reduced motion |
 | Case-study reading column | Subtle progress line and aria-current on the existing table of contents |
@@ -26,7 +26,7 @@ The current site keeps the slat hero, white scrolling name, company branding and
 
 Oracle's time comparisons are static. Its original Before and After workflow figures are both readable without a toggle. Architecture headings are plain text. Organize, replay, comparison and visible motion-pause controls are removed at the owner's request.
 
-Escape toggles motion globally through portfolio:motion-pause. script.js supplies screen-reader instructions and status, pauses the name and adds .motion-paused for CSS loops. micro-slats.js listens to the same event and stops frame scheduling. No extra visible button is required. Finite entrances settle to readable end states when motion is paused. Reduced-motion preferences disable continuous motion and show the static sourcing illustration. All content is visible without JavaScript; the slat field has a CSS fallback if WebGL is unavailable.
+Escape toggles motion globally through portfolio:motion-pause. script.js supplies screen-reader instructions and status, pauses the name and adds .motion-paused for CSS loops. micro-slats.js stops frame scheduling and scroll.js restores native scrolling. No extra visible button is required. Reveals settle to fully visible states when motion is paused. Reduced-motion preferences disable continuous motion, easing and reveal movement. All content is visible without JavaScript; the slat field has a CSS fallback if WebGL is unavailable.
 
 The hero uses --hero-orange (#D5F478) on --hero-orange-base. Hover and visible focus reveal a lime circle growing from the bottom edge in 620ms. The fill includes an aria-hidden copy of the label in dark ink, so dark text appears only over the lime portion while the original lime label remains over the dark portion. Both label layers share the same magnetic movement. The same treatment applies to the MBA badge, including its decorative seal. Reduced motion makes the fill immediate; touch does not use magnetic tracking.
 
@@ -41,6 +41,8 @@ The hero uses --hero-orange (#D5F478) on --hero-orange-base. Hover and visible f
 - Lime palette and sunrise fill: --hero-orange tokens and .hero-sun-action/.hero-sun-fill in refinements.css. Keep the fill's label aria-hidden and the original label accessible. MBA labels on the homepage and resume use simply MBA; education dates remain in the resume.
 - Background palette: slats.css. Wave settings and GPU budgets: micro-slats.js. Keep the contrast veil, 1.8-million-pixel budget and visibility checks.
 - Change shared file query versions in all applicable HTML pages when updating shared assets.
+- Smooth scrolling: scroll.js, with pinned Lenis 1.3.27 and its recommended CSS under assets/vendor. Wheel lerp .12; keyboard lerp .16; same-page anchor duration .9s. Keep native history, focus, touch, nested table scroll and PDF downloads intact. CSS scroll-behavior is auto while Lenis owns wheel easing.
+- Repeated reveals: reveals() in motion.js. Targets are semantic blocks with descendant duplicates removed. The observer stays attached for every entrance; exits beyond the viewport buffer reset opacity and a signed 20px shift. Each block fades for 600ms, with at most 105ms batch delay. The independent --reveal-y translate avoids fighting magnetic GSAP transforms. Resume/footer never shift, preserving document height. Focus, printing, Escape and reduced motion show content immediately. Do not add once-only unobserve calls or persistent hidden CSS.
 - Contact links: `.contact-actions` on the homepage and both case studies. Keep one accessible label and the aria-hidden fill label in each `.contact-pill`. `.contact-magnetic-zone` supplies its stable anchor; group settings in `motion.js` control attraction independently of the hero. `.contact-footer` and `.footer-inner` in `refinements.css` keep the closing surface continuous and full width. The compact web resume retains its light footer.
 
 ## Dependencies and attribution

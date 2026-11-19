@@ -1,3 +1,13 @@
+# Lenis
+
+Version: 1.3.27, pinned and hosted locally as lenis-1.3.27.min.js with the recommended lenis-1.3.27.css stylesheet. Both distribution files are unchanged.
+
+Author: darkroom.engineering. License: MIT; the full terms are in LENIS-LICENSE.txt.
+
+Source: https://github.com/darkroomengineering/lenis/tree/v1.3.27
+
+Distribution: https://unpkg.com/lenis@1.3.27/dist/lenis.min.js and https://unpkg.com/lenis@1.3.27/dist/lenis.css (downloaded at development time; no runtime CDN dependency).
+
 # GSAP core
 
 Version: 3.15.1, pinned and hosted locally. No plugins are included.

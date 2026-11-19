@@ -1,4 +1,7 @@
 /* Portfolio v3: optional motion, layered over the existing editorial system. */
+/* Lenis owns wheel easing; never combine its frame updates with CSS scroll easing. */
+html.lenis,html.lenis body,html.motion-paused{scroll-behavior:auto!important}
+[data-scroll-reveal]{opacity:var(--reveal-opacity,1);translate:0 var(--reveal-y,0px)}
 :root{
   --motion-feedback:200ms;
   --motion-return:440ms;
@@ -76,6 +79,7 @@
 }
 @media(hover:none),(pointer:coarse){.portrait-actions a:active{transform:scale(.96)}}
 @media(prefers-reduced-motion:reduce){
+ [data-scroll-reveal]{opacity:1!important;translate:none!important}
  .depth-light{display:none}
  .education-badge{translate:none}
  .portrait-actions a,.header-inner nav a,.study-toc nav a,.case-study-link,.contact-text-link,.back-link,.resume-links a,.button,.resume-print,.motion-control,.case-study-link>span,.contact-text-link>span,.architecture article,.interface-demo tr,.fund-card{transition:none}
@@ -83,6 +87,7 @@
  details::details-content{transition:none}
 }
 @media print{
+ [data-scroll-reveal]{opacity:1!important;translate:none!important}
  .reading-progress,.motion-toolbar,.workflow-toggle,.depth-light{display:none!important}
  .workflow-panels.is-enhanced{display:block}
  .workflow-panel[data-active="false"]{visibility:visible}
