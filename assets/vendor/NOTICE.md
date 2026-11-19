@@ -2,7 +2,7 @@
 
 The React accordion's additional bundled licenses are retained separately in ../react/THIRD-PARTY-LICENSES.txt. It uses React/React DOM, Lucide React, clsx, tailwind-merge and compiled Tailwind CSS. Its seven illustrative Unsplash photographs are credited in ../about/CREDITS.md.
 
-Version: 1.3.27, pinned and hosted locally as lenis-1.3.27.min.js with the recommended lenis-1.3.27.css stylesheet. Both distribution files are unchanged.
+Version: 1.3.27, pinned and hosted locally as lenis-1.3.27.min.js with the recommended lenis-1.3.27.css stylesheet. The matching official lenis.min.js.map is included for development tools. All distribution files are unchanged.
 
 Author: darkroom.engineering. License: MIT; the full terms are in LENIS-LICENSE.txt.
 
