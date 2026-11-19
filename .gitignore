@@ -1,4 +1,8 @@
 .hallmark/qa/
+node_modules/
+*.tsbuildinfo
+npm-debug.log*
+.vite/
 .hallmark/before/
 .hallmark/after/
 .hallmark/reference/

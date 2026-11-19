@@ -1,0 +1,58 @@
+/* Cue-style flex accordion, scoped to About instead of resetting the page. */
+.cc-cards{gap:8px;isolation:isolate}
+.cc-card{flex:.7;min-width:52px;border:0;border-radius:14px;background:#17211b;transition:flex .75s cubic-bezier(.2,1,.3,1);isolation:isolate}
+.cc-card[open]{flex:2.9}
+.cc-card>.cc-trigger{position:absolute;inset:0;display:block;width:100%;height:100%;min-height:0;padding:0;margin:0;border:0;list-style:none;cursor:pointer;transform:none;outline-offset:-4px}
+.cc-trigger::-webkit-details-marker{display:none}
+.cc-card>.cc-trigger:focus-visible{outline:2px solid #d5f478;outline-offset:-5px;border-radius:14px}
+.cc-card .cc-img{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:var(--cc-position,center);transform:scale(1.04);filter:grayscale(.3) brightness(.75);transition:transform .9s cubic-bezier(.2,1,.3,1),filter .75s cubic-bezier(.2,1,.3,1)}
+.cc-card[open] .cc-img{transform:scale(1);filter:grayscale(0) brightness(.92)}
+.cc-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,10,7,.96),rgba(4,10,7,.8) 42%,rgba(4,10,7,.16) 78%,rgba(4,10,7,.48));pointer-events:none}
+.cc-topbar{position:absolute;inset:14px 14px auto;display:flex;justify-content:space-between;align-items:center;gap:8px;color:#fff;z-index:1}
+.cc-idx{font-size:11px;letter-spacing:.1em;line-height:1.4;white-space:nowrap}
+.cc-arrow{flex-shrink:0}
+.cc-card:not([open]) .cc-arrow{opacity:0}
+.cc-card:not([open]) .cc-idx{opacity:0}
+.cc-v-title{position:absolute;left:16px;bottom:18px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:#fff;transition:opacity .25s ease;z-index:1}
+.cc-card[open] .cc-v-title{opacity:0}
+.cc-content{position:absolute;inset:auto 18px 16px;z-index:2;color:#fff;animation:cc-content-in .45s cubic-bezier(.2,1,.3,1) both}
+.cc-card .cc-group{font-size:10px;line-height:1.3;letter-spacing:.12em;text-transform:uppercase;color:#d5f478;max-width:none;margin:0 0 6px}
+.cc-card .cc-title{font-size:22px;font-weight:500;line-height:1.12;letter-spacing:-.025em;color:#fff;margin:0 0 8px;max-width:27ch}
+.cc-card .cc-description{font-size:14px;line-height:1.45;max-width:48ch;color:#fff;margin:0;text-wrap:pretty}
+.cc-card .cc-cta{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:28px;margin-top:8px;color:#d5f478;font-size:12px;font-weight:500;text-decoration:underline;text-underline-offset:.25em;pointer-events:auto}
+.cc-card .cc-cta:focus-visible{outline-color:#d5f478;outline-offset:3px}
+.cc-card::details-content,.cc-card[open]::details-content{opacity:1;transition:none}
+@keyframes cc-content-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1100px){
+ .cc-cards{gap:6px}.cc-content{inset:auto 14px 14px}.cc-card .cc-title{font-size:19px}.cc-card .cc-description{font-size:13px;line-height:1.4}.cc-topbar{inset:12px 12px auto}.cc-idx{font-size:10px}
+}
+@media(max-width:600px){
+ .cc-cards{flex-direction:column;gap:5px}
+ .cc-card{flex:.7;min-width:0;min-height:36px;border-radius:10px}
+ .cc-card[open]{flex:3.8}
+ .cc-v-title{left:14px;top:50%;bottom:auto;writing-mode:horizontal-tb;transform:translateY(-50%);font-size:12px;letter-spacing:.09em}
+ .cc-topbar{inset:10px 14px auto}
+ .cc-card:not([open]) .cc-topbar{top:50%;transform:translateY(-50%);justify-content:flex-end}
+ .cc-card:not([open]) .cc-idx{display:none}
+ .cc-card:not([open]) .cc-arrow{opacity:1;width:14px;height:14px}
+ .cc-content{inset:auto 14px 12px}
+ .cc-card .cc-title{font-size:18px;line-height:1.1;margin-bottom:6px;max-width:30ch}
+ .cc-card .cc-description{font-size:13px;line-height:1.35;max-width:none}
+ .cc-card .cc-group{font-size:9px;margin-bottom:4px}
+ .cc-card .cc-cta{margin-top:4px;min-height:24px;font-size:11px}
+ .cc-card>.cc-trigger:focus-visible{border-radius:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ .cc-card,.cc-card .cc-img,.cc-v-title{transition:none}
+ .cc-content{animation:none}
+}
+.motion-paused .cc-card,.motion-paused .cc-card .cc-img,.motion-paused .cc-v-title{transition:none}
+.motion-paused .cc-content{animation:none}
+@media print{
+ .cc-cards{display:block!important;height:auto!important}
+ .cc-card{min-height:180px;margin-bottom:12px;break-inside:avoid}
+ .cc-card::details-content{content-visibility:visible!important;display:block!important}
+ .cc-content{position:relative;inset:auto;padding:18px;animation:none}
+ .cc-trigger{display:none!important}
+ .cc-card .cc-title,.cc-card .cc-description{color:#000}
+}

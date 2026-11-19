@@ -1,49 +1,16 @@
-/* Preserve the compact About footprint while making both sides visible. */
-.compact-home #about .about-grid{min-block-size:calc(clamp(64.8px,6.21vw,97.2px) + 253.78px);align-items:stretch}
-.about-introduction .about-lead{font-size:clamp(1.125rem,1.7vw,1.5rem);line-height:1.4;max-width:30ch;margin-top:20px}
-.about-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;min-width:0}
-.about-panel{display:flex;flex-direction:column;min-width:0;padding:10px;border:1px solid var(--color-rule);border-radius:16px;background:var(--color-paper-2)}
-.about-panel-heading{margin-bottom:8px}
-.about-panel-heading h3{font-size:20px;line-height:1.2;letter-spacing:-.02em}
-.about-mini-grid{display:flex;flex-direction:column;gap:3px;flex:1}
-.about-mini-card{min-width:0;flex:1;display:flex;flex-direction:column;justify-content:center;padding:4px 10px;border:1px solid var(--color-rule);border-radius:8px;background:var(--color-paper);transition:background-color 240ms var(--ease-out),border-color 240ms var(--ease-out)}
-.about-mini-card h4{font-size:14px;font-weight:600;line-height:1.25;letter-spacing:0;margin:0}
-.about-mini-card p{font-size:13px;line-height:1.3;color:var(--color-muted);margin-top:2px;max-width:none}
-.about-mini-card.brand-myntra h4,.about-mini-card.brand-oracle h4{color:var(--color-accent)}
-.about-mini-card:is(.brand-myntra,.brand-oracle){border-inline-start:2px solid var(--color-accent)}
-.interest-gaming{flex-grow:1.5}
+/* About keeps its measured footprint; React renders the photo accordion inside it. */
+.compact-home #about .about-grid{block-size:calc(clamp(64.8px,6.21vw,97.2px) + 253.78px);min-block-size:0;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:12px;align-items:stretch}
+.about-introduction{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:32px;align-items:center}
+.about-introduction .about-lead{font-size:clamp(18px,1.4vw,24px);line-height:1.35;max-width:45ch;margin:0}
+#about-cards-root{min-width:0;min-height:0;height:100%}
 .degree-seal svg{width:26px;height:26px;flex-shrink:0}
-@media(hover:hover) and (prefers-reduced-motion:no-preference){
- .about-mini-card:hover{background:var(--color-logo-paper);border-color:var(--color-accent)}
-}
-@media(min-width:961px) and (max-width:1100px){
- .compact-home #about .about-grid{min-block-size:calc(clamp(64.8px,6.21vw,97.2px) + 254.58px)}
- .about-panels{gap:12px}.about-panel{padding:10px}.about-mini-card{padding:4px 8px}
- .about-mini-card p{font-size:12.5px}.about-panel-heading h3{font-size:19px}
-}
-@media(max-width:960px){
- .compact-home #about .about-grid{min-block-size:375px;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:12px}
- .about-introduction{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:24px;align-items:start}
- .about-introduction .about-lead{font-size:18px;line-height:1.35;max-width:45ch;margin:0}
- .about-panel{padding:10px}.about-panel-heading{margin-bottom:7px}
- .about-mini-card{padding-block:4px}
-}
+@media(min-width:961px) and (max-width:1100px){.compact-home #about .about-grid{block-size:calc(clamp(64.8px,6.21vw,97.2px) + 254.58px)}}
+@media(max-width:960px){.compact-home #about .about-grid{block-size:375px}.about-introduction{gap:24px}.about-introduction .about-lead{font-size:18px}}
 @media(max-width:600px){
- .compact-home #about .about-grid{min-block-size:576px}
+ .compact-home #about .about-grid{block-size:576px}
  .about-introduction{display:block}
  .about-introduction .about-lead{margin-top:12px;max-width:34ch}
- .about-panels{gap:12px}
- .about-panel{padding:10px;border-radius:12px}
- .about-panel-heading h3{font-size:18px}
- .about-mini-card{padding:6px 8px;border-radius:7px}
- .about-mini-card p{font-size:12.5px;line-height:1.35}
  .degree-seal svg{width:22px;height:22px}
 }
-@media(max-width:360px){
- .compact-home #about .about-grid{min-block-size:635px}
- .about-panels{gap:8px}.about-panel{padding:8px}.about-mini-card{padding:5px 6px}
- .about-panel-heading h3{font-size:17px}
- .about-mini-card h4{font-size:13px}.about-mini-card p{font-size:12px}
-}
-@media(prefers-reduced-motion:reduce){.about-mini-card{transition:none}}
-@media print{.about-panel,.about-mini-card{break-inside:avoid}.compact-home #about .about-grid{min-block-size:0}}
+@media(max-width:360px){.compact-home #about .about-grid{block-size:635px}}
+@media print{.compact-home #about .about-grid{block-size:auto;display:block}#about-cards-root{height:auto}}

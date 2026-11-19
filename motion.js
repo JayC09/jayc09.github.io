@@ -82,9 +82,9 @@
       '.case-study-link', '.project-meta', '.tags', '.brand-lockup', '.study-impact>*', '.study-cards>article',
       '.flow', '.table-wrap', '.credentials>div', '.skills>div', '.contact-actions', '.study-next>.pill-magnetic-zone',
       '.cv-heading', '.cv-role', '.cv-sidebar>section', '.footer-inner>*', '.cv-footer>*',
-      '.about-panel-heading', '.about-mini-card'
+      '#about-cards-root'
     ].join(',');
-    const candidates = all(selector).filter(node => !node.closest('[aria-hidden="true"],.study-toc,figcaption'));
+    const candidates = all(selector).filter(node => !node.closest('[aria-hidden="true"],.study-toc,figcaption') && (!node.closest('#about-cards-root') || node.id === 'about-cards-root'));
     // Animate each independent content block once per entrance, without nesting fades.
     const targets = candidates.filter(node => !candidates.some(parent => parent !== node && parent.contains(node)));
     const states = targets.map((node, index) => {
