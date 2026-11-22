@@ -129,6 +129,17 @@
 .portrait-content .hero-sun-action:focus-visible{outline:2px solid var(--hero-orange);outline-offset:5px}
 @media(prefers-reduced-motion:reduce){.hero-sun-fill{transition:none}}
 .motion-paused .hero-sun-fill{transition:none}
+/* One shared centerline for the MBA badge and both hero actions. */
+.portrait-hero>.portrait-content{display:flex;align-items:center;justify-content:space-between;gap:var(--space-sm);padding-inline:0}
+.portrait-content>.education-badge{position:relative;inset:auto;flex-shrink:0;margin:0}
+.portrait-content>.portrait-role{position:relative;inset:auto;margin-right:clamp(48px,12%,240px);flex-shrink:0}
+.portrait-content>.portrait-role>p{position:absolute;left:0;bottom:calc(100% + var(--space-lg));margin:0;white-space:nowrap}
+@media(max-width:960px){
+ .portrait-content>.portrait-role{margin-right:var(--gutter)}
+ .portrait-content>.portrait-role>p{bottom:calc(100% + var(--space-md))}
+}
+@media(max-width:600px){.portrait-content>.portrait-role>p{bottom:calc(100% + var(--space-sm))}}
+@media(max-width:360px){.portrait-content>.education-badge .degree-seal{display:none}}
 /* Contact actions echo the hero, with stable pill-sized magnetic targets. */
 .contact-section .contact-actions{gap:var(--space-sm);flex-shrink:0;max-width:100%}
 .contact-magnetic-zone,.pill-magnetic-zone{position:relative;display:inline-flex;flex-shrink:0}
